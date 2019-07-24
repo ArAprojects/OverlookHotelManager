@@ -10,4 +10,30 @@ import './css/base.scss';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
 
-console.log('This is the JavaScript entry file - your code begins here.');
+$("#main-page-button").on("click", () => {
+  $("section").hide()
+  $(".main-page").show()
+  $("button").css("background-color", "#585555");
+  $("#main-page-button").css("background-color", "darkgrey")
+})
+
+$("#orders-button").on("click", () => {
+  $("section").hide()
+  $(".orders").show()
+  $("button").css("background-color", "#585555");
+  $("#orders-button").css("background-color", "blue")
+})
+
+$("#rooms-button").on("click", () => {
+  $("section").hide()
+  $(".rooms").show()
+  $("button").css("background-color", "#585555");
+  $("#rooms-button").css("background-color", "red")
+})
+
+$("#customer-button").on("click", () => {
+  $("section").hide()
+  $(".customer").show()
+  $("button").css("background-color", "#585555");
+  $("#customer-button").css("background-color", "beige")
+})

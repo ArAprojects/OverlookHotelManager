@@ -21,7 +21,7 @@ h2  {
 }
 
 section {
-
+  height: 87vh;
 }
 
 button {
@@ -30,17 +30,34 @@ button {
   height: 50px;
   margin-right: 2%;
   border: none;
+  outline: 0;
+}
+
+.darkgrey-button {
+  background-color: #585555;
 }
 
 #main-page-button {
   background-color: darkgrey;
 }
 
+#orders-button {
+
+}
+
+
+#rooms-button {
+
+}
+
+#customers-button {
+
+}
+
 
 
 .main-page {
   background-color: darkgrey;
-  height: 87vh;
 }
 
 .orders {
