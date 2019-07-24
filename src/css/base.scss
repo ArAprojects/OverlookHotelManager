@@ -2,5 +2,46 @@
 $primary-background: aliceblue;
 
 body {
+  margin: 0;
+  padding: 0;
   background-color: $primary-background;
+  height: 100vh
+}
+
+header {
+
+}
+
+main {
+  background-color: grey;
+  height: 90vh;
+  margin: 2%;
+}
+
+h2  {
+  margin: 0
+}
+
+section {
+
+}
+
+button {
+  width: 70px;
+}
+
+.main-page {
+  
+}
+
+.orders {
+  background-color: blue;
+}
+
+.rooms {
+  background-color: red;
+}
+
+.customer {
+  background-color: beige;
 }
