@@ -1,5 +1,5 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
-$primary-background: aliceblue;
+$primary-background: grey;
 
 body {
   margin: 0;
@@ -9,12 +9,10 @@ body {
 }
 
 header {
-
+  background-color: grey;
 }
 
 main {
-  background-color: grey;
-  height: 90vh;
   margin: 2%;
 }
 
@@ -27,11 +25,22 @@ section {
 }
 
 button {
-  width: 70px;
+  background-color: #585555;
+  width: 10%;
+  height: 50px;
+  margin-right: 2%;
+  border: none;
 }
 
+#main-page-button {
+  background-color: darkgrey;
+}
+
+
+
 .main-page {
-  
+  background-color: darkgrey;
+  height: 87vh;
 }
 
 .orders {
