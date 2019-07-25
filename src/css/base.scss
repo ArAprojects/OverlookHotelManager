@@ -62,9 +62,9 @@ button {
 
 
 .main-page {
-  background-image: url("../images/office.png");
-  background-repeat: no-repeat;
-  background-size: cover;
+  // background-image: url("../images/office.png");
+  // background-repeat: no-repeat;
+  // background-size: cover;
   background-color: darkgrey;
 }
 
@@ -78,4 +78,8 @@ button {
 
 .customer {
   background-color: darkgrey;
+}
+
+.date-display {
+  text-align: right;
 }
