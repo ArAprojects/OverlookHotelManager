@@ -1,7 +1,7 @@
 
 import $ from 'jquery';
 import './css/base.scss';
-import './images/turing-logo.png'
+import './images/office.png'
 
 var today = new Date();
 
