@@ -1,6 +1,85 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
-$primary-background: pink;
+$primary-background: grey;
 
 body {
+  margin: 0;
+  padding: 0;
   background-color: $primary-background;
+  height: 100vh;
+  font-family: 'Nunito';
+  letter-spacing: 2px;
+}
+
+header {
+  background-color: grey;
+}
+
+main {
+  margin: 2%;
+}
+
+h2  {
+  margin: 0
+}
+
+section {
+  height: 87vh;
+  font-weight: bold;
+  font-size: 2em;
+}
+
+button {
+  background-color: #585555;
+  width: 10%;
+  height: 50px;
+  margin-right: 2%;
+  border: none;
+  outline: 0;
+  font-size: 1.2em;
+}
+
+.darkgrey-button {
+  background-color: #585555;
+}
+
+#main-page-button {
+  background-color: darkgrey;
+}
+
+#orders-button {
+
+}
+
+
+#rooms-button {
+
+}
+
+#customers-button {
+
+}
+
+
+
+.main-page {
+  // background-image: url("../images/office.png");
+  // background-repeat: no-repeat;
+  // background-size: cover;
+  background-color: darkgrey;
+}
+
+.orders {
+  background-color: darkgrey;
+}
+
+.rooms {
+  background-color: darkgrey;
+}
+
+.customer {
+  background-color: darkgrey;
+}
+
+.date-display {
+  text-align: right;
 }

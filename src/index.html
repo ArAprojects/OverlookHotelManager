@@ -1,13 +1,33 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <title>Webpack Starter Kit</title>
+    <title>Overlook</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600i&display=swap" rel="stylesheet">
   </head>
   <body>
-    <h1>Webpack Starter Kit</h1>
-
-    <img src="/images/turing-logo.png" alt="turing logo" height="100px" width="100px">
-
-    <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
+    <main>
+      <header>
+        <button type="button" name="button" id="main-page-button">Home</button>
+        <button type="button" name="button" id="orders-button">Orders</button>
+        <button type="button" name="button" id="rooms-button">Rooms</button>
+        <button type="button" name="button" id="customer-button">Customer</button>
+      </header>
+      <section class="main-page">
+        <h2>Main</h2>
+        <div class="date-display">
+        </div>
+      </section>
+      <section class="orders" style="display: none">
+        <h2>Orders</h2>
+      </section>
+      <section class="rooms" style="display: none">
+        <h2>Rooms</h2>
+      </section>
+      <section class="customer" style="display: none">
+        <h2>Customer</h2>
+      </section>
+    </main>
   </body>
 </html>

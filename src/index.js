@@ -1,13 +1,44 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
 
-// An example of how you import jQuery into a JS file if you use jQuery in that file
 import $ from 'jquery';
-
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
+import './images/office.png'
 
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
+var today = new Date();
 
-console.log('This is the JavaScript entry file - your code begins here.');
+$(document).ready(function() {
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var yyyy = today.getFullYear();
+  today = mm + '/' + dd + '/' + yyyy;
+  $(".date-display").text(today)
+});
+
+
+
+$("#main-page-button").on("click", () => {
+  $("section").hide()
+  $(".main-page").show()
+  $("button").css("background-color", "#585555");
+  $("#main-page-button").css("background-color", "darkgrey")
+})
+
+$("#orders-button").on("click", () => {
+  $("section").hide()
+  $(".orders").show()
+  $("button").css("background-color", "#585555");
+  $("#orders-button").css("background-color", "darkgrey")
+})
+
+$("#rooms-button").on("click", () => {
+  $("section").hide()
+  $(".rooms").show()
+  $("button").css("background-color", "#585555");
+  $("#rooms-button").css("background-color", "darkgrey")
+})
+
+$("#customer-button").on("click", () => {
+  $("section").hide()
+  $(".customer").show()
+  $("button").css("background-color", "#585555");
+  $("#customer-button").css("background-color", "darkgrey")
+})
