@@ -3,8 +3,9 @@ import './css/base.scss';
 import './images/office.png'
 import Hotel from '../src/hotel.js'
 var today = new Date();
-
 var hotel
+
+
 Promise.all([
   fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms").then(response => response.json()),
   fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings").then(response => response.json()),
@@ -14,7 +15,7 @@ Promise.all([
 
 function makeHotel(rooms, bookings, users, roomService) {
    hotel = new Hotel(rooms, bookings, users, roomService)
-   console.log(hotel.users)
+   console.log(hotel.bookings)
 }
 
 
