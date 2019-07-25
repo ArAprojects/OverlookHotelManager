@@ -1,9 +1,35 @@
-
 import $ from 'jquery';
 import './css/base.scss';
 import './images/office.png'
-
 var today = new Date();
+
+var hotel
+Promise.all([
+  fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms").then(response => response.json()),
+  fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings").then(response => response.json()),
+  fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users").then(response => response.json()),
+  fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/room-services/roomServices").then(response => response.json())]
+)
+.then(data => speakTruths(data[0].rooms, data[1].bookings, data[2].users, data[3].roomServices))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 $(document).ready(function() {
   var dd = String(today.getDate()).padStart(2, '0');
