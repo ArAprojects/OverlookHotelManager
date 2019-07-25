@@ -5,8 +5,9 @@ body {
   margin: 0;
   padding: 0;
   background-color: $primary-background;
-  height: 100vh
-  font-family: 'Nunito', sans-serif;
+  height: 100vh;
+  font-family: 'Nunito';
+  letter-spacing: 2px;
 }
 
 header {
@@ -23,6 +24,8 @@ h2  {
 
 section {
   height: 87vh;
+  font-weight: bold;
+  font-size: 2em;
 }
 
 button {
@@ -63,13 +66,13 @@ button {
 }
 
 .orders {
-  background-color: blue;
+  background-color: darkgrey;
 }
 
 .rooms {
-  background-color: red;
+  background-color: darkgrey;
 }
 
 .customer {
-  background-color: beige;
+  background-color: darkgrey;
 }
