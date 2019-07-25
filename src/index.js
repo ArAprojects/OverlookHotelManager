@@ -9,8 +9,15 @@ Promise.all([
   fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings").then(response => response.json()),
   fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users").then(response => response.json()),
   fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/room-services/roomServices").then(response => response.json())]
-)
-.then(data => speakTruths(data[0].rooms, data[1].bookings, data[2].users, data[3].roomServices))
+).then(data => makeHotel(data[0].rooms, data[1].bookings, data[2].users, data[3].roomServices))
+
+function makeHotel(rooms, bookings, users, roomService) {
+   hotel = new Hotel(rooms, bookings, users, roomService)
+}
+
+
+
+
 
 
 
