@@ -6,5 +6,6 @@ class Hotel {
   this.roomService = roomService
   }
 
-
 }
+
+export default Hotel

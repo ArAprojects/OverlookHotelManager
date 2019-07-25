@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import './css/base.scss';
 import './images/office.png'
+import Hotel from '../src/hotel.js'
 var today = new Date();
 
 var hotel
@@ -13,6 +14,7 @@ Promise.all([
 
 function makeHotel(rooms, bookings, users, roomService) {
    hotel = new Hotel(rooms, bookings, users, roomService)
+   console.log(hotel.users)
 }
 
 
