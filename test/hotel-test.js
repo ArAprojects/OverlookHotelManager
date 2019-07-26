@@ -20,4 +20,10 @@ describe('Hotel', function() {
     expect(hotel).to.be.an.instanceof(Hotel);
   });
 
+  it('should be able to get all rooms available today', () => {
+    expect(hotel).to.be.an.instanceof(Hotel);
+  });
+
+
+
 });
