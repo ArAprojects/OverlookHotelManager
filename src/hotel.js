@@ -6,13 +6,12 @@ import Customer from "../src/customer"
 class Hotel {
   constructor(rooms, bookings, orders, users) {
     this.room = rooms
-    this.bookings = bookings
+    this.bookings = bookings.map(booking => new Booking(booking.userID, booking.date, booking.roomNumber))
     this.orders = orders.map(order => new Order(order.userID, order.date, order.food, order.totalCost))
     this.users = users.map(el => new Customer(el.id, el.name, this.bookings, this.orders))
     this.todaysDate = null;
     this.currentCustomer = null;
   }
-
 
   giveTodaysDate() {
     var today = new Date();
@@ -33,8 +32,8 @@ class Hotel {
     this.users.push(this.currentCustomer)
   }
 
-  createNewBooking() {
-
+  createNewBooking(roomNumber) {
+    this.bookings.push(new Booking(this.currentCustomer.userID, this.todaysDate, roomNumber))
   }
 
   createNewOrder(food, cost) {
