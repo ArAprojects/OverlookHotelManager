@@ -2,7 +2,6 @@ import $ from 'jquery';
 import './css/base.scss';
 import './images/office.png'
 import Hotel from '../src/hotel.js'
-var today = new Date();
 var hotel
 
 
@@ -15,40 +14,9 @@ Promise.all([
 
 function makeHotel(rooms, bookings, users, roomService) {
    hotel = new Hotel(rooms, bookings, users, roomService)
-   console.log(hotel.bookings)
+   hotel.giveTodaysDate()
+   $(".date-display").text(hotel.todaysDate)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-$(document).ready(function() {
-  var dd = String(today.getDate()).padStart(2, '0');
-  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-  var yyyy = today.getFullYear();
-  today = mm + '/' + dd + '/' + yyyy;
-  $(".date-display").text(today)
-});
-
 
 
 $("#main-page-button").on("click", () => {
