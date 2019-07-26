@@ -18,13 +18,17 @@ class Hotel {
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
-    this.todaysDate = mm + '/' + dd + '/' + yyyy;
+    this.todaysDate = yyyy + '/' + mm + '/' + dd;
   }
 
 
   roomsAvailableforToday() {
-
+    return this.bookings.filter(booking => booking.date === this.todaysDate)
   }
+
+//   - Total Rooms Available for today's date
+// - Total revenue for today's date
+// - Percentage of rooms occupied for today's date
 
   addNewCustomer(name) {
     let id = this.users.length + 1
@@ -33,7 +37,7 @@ class Hotel {
   }
 
   createNewBooking(roomNumber) {
-    this.bookings.push(new Booking(this.currentCustomer.userID, this.todaysDate, roomNumber))
+    this.bookings.push(new Booking(this.currentCustomer.id, this.todaysDate, roomNumber))
   }
 
   createNewOrder(food, cost) {

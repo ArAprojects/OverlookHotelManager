@@ -17,7 +17,10 @@ function makeHotel(rooms, bookings, roomService, users) {
    hotel.giveTodaysDate()
    hotel.addNewCustomer("bill")
    hotel.createNewOrder("yummyfood", 12.55)
+   hotel.createNewBooking(12345)
    hotel.currentCustomer.findCurrentCustomerData()
+   console.log(hotel.roomsAvailableforToday())
+   console.log(hotel.todaysDate)
    $(".date-display").text(hotel.todaysDate)
    console.log(hotel.currentCustomer)
 }
