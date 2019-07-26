@@ -37,7 +37,7 @@ class Hotel {
 
   percentRoomsOccupiedToday() {
       let occRooms = this.roomsBookedToday()
-      return ((occRooms / this.rooms.length) * 100).toFixed(2)
+      return ((occRooms / this.rooms.length) * 100).toFixed(0)
   }
 
   totalOrderRevenue() {

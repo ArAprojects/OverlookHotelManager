@@ -27,6 +27,8 @@ function makeHotel(rooms, bookings, roomService, users) {
    // console.log(hotel.totalRevenueForToday())
    // hotel.findCustomerByName("Brook Christiansen")
    $(".date-display").text(hotel.todaysDate)
+   $(".occupancy-display").text(`There are ${hotel.roomsAvailableforToday()} rooms available with an occupancy of ${hotel.percentRoomsOccupiedToday()} percent!`)
+   $(".revenue-display").text(`${hotel.totalRevenueForToday()}$ was made today.`)
    console.log(hotel.currentCustomer)
 }
 
