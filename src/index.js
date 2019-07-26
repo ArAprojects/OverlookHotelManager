@@ -40,6 +40,16 @@ function makeHotel(rooms, bookings, roomService, users) {
 
 
 
+$("#customer-search-button").on("click", () => {
+  $("#customer-search-input").on("keyup", () => {
+    var name = $("#customer-search-input").val()
+     hotel.findCustomerByName(name)
+  })
+  $(".customer-name-display").text(hotel.currentCustomer.name  + hotel.currentCustomer.id)
+  $(".customer-name-displayy")
+})
+
+
 
 $("#main-page-button").on("click", () => {
   $("section").hide()
