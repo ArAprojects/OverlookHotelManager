@@ -58,16 +58,17 @@ class Hotel {
   addNewCustomer(name) {
     let id = this.users.length + 1
     this.currentCustomer = new Customer(id, name, this.bookings, this.orders)
-    this.currentCustomer.findCurrentCustomerData()
     this.users.push(this.currentCustomer)
   }
 
   createNewBooking(roomNumber) {
     this.bookings.push(new Booking(this.currentCustomer.id, this.todaysDate, roomNumber))
+    this.currentCustomer.findCurrentCustomerData()
   }
 
   createNewOrder(food, cost) {
     this.orders.push(new Order(this.currentCustomer.id, this.todaysDate, food, cost))
+    this.currentCustomer.findCurrentCustomerData()
   }
 
   findCustomerByName(name) {

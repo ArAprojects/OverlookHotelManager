@@ -16,18 +16,27 @@ function makeHotel(rooms, bookings, roomService, users) {
    hotel = new Hotel(rooms, bookings,roomService, users)
    hotel.giveTodaysDate()
    hotel.giveallUsersBookingsandOrders()
+
+   hotel.addNewCustomer("bill")
+   hotel.createNewOrder("yummyfood", 12.55)
    console.log(hotel.users)
-   // hotel.addNewCustomer("bill")
-   // hotel.createNewOrder("yummyfood", 12.55)
    // hotel.currentCustomer.findCurrentCustomerData()
    // console.log(hotel.roomsAvailableforToday())
    // console.log(hotel.percentRoomsOccupiedToday())
    // console.log(hotel.roomsBookedToday())
    // console.log(hotel.totalRevenueForToday())
-   hotel.findCustomerByName("Brook Christiansen")
+   // hotel.findCustomerByName("Brook Christiansen")
    $(".date-display").text(hotel.todaysDate)
    console.log(hotel.currentCustomer)
 }
+
+
+
+// Total Rooms Available for today's date
+// - Total revenue for today's date
+// - Percentage of rooms occupied for today's date
+
+
 
 
 $("#main-page-button").on("click", () => {
