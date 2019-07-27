@@ -14,9 +14,9 @@ Promise.all([
 
 function makeHotel(rooms, bookings, roomService, users) {
    hotel = new Hotel(rooms, bookings,roomService, users)
-   // hotel.giveTodaysDate()
+   hotel.giveTodaysDate()
    hotel.giveallUsersBookingsandOrders()
-   displayOrdersToday()
+   displayOrdersToday("2019/08/19")
 
    // hotel.addNewCustomer("bill")
    // hotel.createNewOrder("yummyfood", 12.55)
@@ -28,7 +28,7 @@ function makeHotel(rooms, bookings, roomService, users) {
    // console.log(hotel.totalRevenueForToday())
    // hotel.findCustomerByName("Brook Christiansen")
 
-   console.log(hotel.ordersToday())
+
    $(".date-display").text(hotel.todaysDate)
    $(".occupancy-display").text(`There are ${hotel.roomsAvailableforToday()} rooms available with an occupancy of ${hotel.percentRoomsOccupiedToday()} percent!`)
    $(".revenue-display").text(`${hotel.totalRevenueForToday()}$ was made today.`)
@@ -74,20 +74,41 @@ function hideNonSpecificDisplays() {
   }
 
 
+$(".order-search-button").on("click", () => {
+    searchForOrders()
+})
+
+  function searchForOrders() {
+    let date = $(".order-search-input").val()
+    displayOrdersToday(date)
+  }
 
 
-function displayOrdersToday() {
-  if (hotel.ordersToday().length === 0) {
+  $("#customer-search-button").on("click", () => {
+    $("#customer-search-input").on("keyup", () => {
+      let name = $("#customer-search-input").val()
+       hotel.findCustomerByName(name)
+    })
+    $("table").text("")
+    $(".customer-name").text(`Customer selected:${hotel.currentCustomer.name}`)
+  })
+
+
+
+function displayOrdersToday(date) {
+    $(".order-table").text('')
+  if (hotel.ordersToday(date).length === 0) {
     $(".no-order-display").text("There are no orders today")
   }
   else {
-      $(".order-display").text("Todays orders are...")
+      $(".no-order-display").text('')
+      $(".order-display").text(`Orders for ${date}`)
       $(".order-table").append("<tr>")
       $(".order-table").append("<td>" + "ID")
       $(".order-table").append("<td>" + "Food")
       $(".order-table").append("<td>" + "Date")
       $(".order-table").append("<td>" + "TotalCost")
-    hotel.ordersToday().forEach(order => {
+    hotel.ordersToday(date).forEach(order => {
       $(".order-table").append("<tr>")
       $(".order-table").append("<td>" + order.userID)
       $(".order-table").append("<td>" + order.food)
@@ -106,8 +127,6 @@ $("#customer-search-button").on("click", () => {
   $(".customer-name").text(`Customer selected:${hotel.currentCustomer.name}`)
   hideNonSpecificDisplays()
   showSpecificDisplays()
-
-  console.log(hotel.currentCustomer.customerTotalSpentOnRoomService())
 })
 
   let name1
