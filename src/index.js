@@ -35,6 +35,13 @@ function makeHotel(rooms, bookings, roomService, users) {
 }
 
 
+function hideNonSpecificDisplays() {
+  if (hotel.currentCustomer !== null)
+   {
+    $(".general-display").hide()
+  }
+
+}
 
 
 
@@ -44,14 +51,12 @@ function displayOrdersToday() {
   }
   else {
     $(".order-display").text("Todays orders are...")
-    hotel.ordersToday().forEach( (order, index) => {
+    hotel.ordersToday().forEach(order => {
       $("table").append("<tr>")
       $("table").append("<td>" + order.userID)
       $("table").append("<td>" + order.food)
       $("table").append("<td>" + order.date)
       $("table").append("<td>" + order.totalCost)
-      // $("table").html()
-      // $("table").html()
     })
   }
 }
@@ -61,8 +66,10 @@ $("#customer-search-button").on("click", () => {
     let name = $("#customer-search-input").val()
      hotel.findCustomerByName(name)
   })
+
   $(".customer-name-display").text(hotel.currentCustomer.name  + hotel.currentCustomer.id)
   $(".customer-name").text(`Customer selected:${hotel.currentCustomer.name}`)
+  hideNonSpecificDisplays()
 })
 
   let name1
@@ -75,6 +82,7 @@ $("#make-new-customer-name-button").on("click", () => {
   $("#new-customer-name-input").val('')
   $(".customer-name-display").text(hotel.currentCustomer.name  + hotel.currentCustomer.id)
     $(".customer-name").text(`Customer selected:${hotel.currentCustomer.name}`)
+    hideNonSpecificDisplays()
 })
 
 $("#main-page-button").on("click", () => {
