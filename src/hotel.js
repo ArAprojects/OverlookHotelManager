@@ -35,6 +35,16 @@ class Hotel {
     return this.rooms.length - this.bookings.filter(booking => booking.date === this.todaysDate).length
   }
 
+  findRoomsBooked() {
+    let allDates = this.bookings.map(booking => booking.date)
+    let uniqueDates = [...new Set(allDates)]
+    let filteredDates = uniqueDates.map(date1 => {
+      return this.bookings.filter(booking => booking.date === date1)
+    })
+    return filteredDates.sort(  (a, b) => b.length - a.length )[0][0].date
+  }
+
+
 
   percentRoomsOccupiedToday() {
       let occRooms = this.roomsBookedToday()
