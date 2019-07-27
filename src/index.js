@@ -17,8 +17,8 @@ function makeHotel(rooms, bookings, roomService, users) {
    hotel.giveTodaysDate()
    hotel.giveallUsersBookingsandOrders()
 
-   hotel.addNewCustomer("bill")
-   hotel.createNewOrder("yummyfood", 12.55)
+   // hotel.addNewCustomer("bill")
+   // hotel.createNewOrder("yummyfood", 12.55)
    console.log(hotel.users)
    // hotel.currentCustomer.findCurrentCustomerData()
    // console.log(hotel.roomsAvailableforToday())
@@ -29,7 +29,7 @@ function makeHotel(rooms, bookings, roomService, users) {
    $(".date-display").text(hotel.todaysDate)
    $(".occupancy-display").text(`There are ${hotel.roomsAvailableforToday()} rooms available with an occupancy of ${hotel.percentRoomsOccupiedToday()} percent!`)
    $(".revenue-display").text(`${hotel.totalRevenueForToday()}$ was made today.`)
-   console.log(hotel.currentCustomer)
+   // console.log(hotel.currentCustomer)
 }
 
 
@@ -42,11 +42,21 @@ function makeHotel(rooms, bookings, roomService, users) {
 
 $("#customer-search-button").on("click", () => {
   $("#customer-search-input").on("keyup", () => {
-    var name = $("#customer-search-input").val()
+    let name = $("#customer-search-input").val()
      hotel.findCustomerByName(name)
   })
   $(".customer-name-display").text(hotel.currentCustomer.name  + hotel.currentCustomer.id)
-  $(".customer-name-displayy")
+})
+
+  let name1
+$("#new-customer-name-input").on("keyup", () => {
+    name1 = $("#new-customer-name-input").val()
+})
+
+$("#make-new-customer-name-button").on("click", () => {
+  hotel.addNewCustomer(name1)
+  $("#new-customer-name-input").val('')
+  $(".customer-name-display").text(hotel.currentCustomer.name  + hotel.currentCustomer.id)
 })
 
 
