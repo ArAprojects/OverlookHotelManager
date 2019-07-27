@@ -35,9 +35,6 @@ class Hotel {
     return this.rooms.length - this.bookings.filter(booking => booking.date === this.todaysDate).length
   }
 
-  // searchForOrderBasedOnDate(date) {
-  //   return this.orders.filter(order => order.date === date)
-  // }
 
   percentRoomsOccupiedToday() {
       let occRooms = this.roomsBookedToday()

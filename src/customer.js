@@ -23,7 +23,7 @@ class Customer {
   }
 
   customerTotalSpentOnRoomService() {
-    return this.customerOrders.reduce( (acc, total) => acc + total.totalCost, 0)
+    return (this.customerOrders.reduce( (acc, total) => acc + total.totalCost, 0)).toFixed(2)
   }
 
 
