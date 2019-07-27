@@ -62,6 +62,7 @@ $("#customer-search-button").on("click", () => {
      hotel.findCustomerByName(name)
   })
   $(".customer-name-display").text(hotel.currentCustomer.name  + hotel.currentCustomer.id)
+  $(".customer-name").text(`Customer selected:${hotel.currentCustomer.name}`)
 })
 
   let name1
@@ -73,6 +74,7 @@ $("#make-new-customer-name-button").on("click", () => {
   hotel.addNewCustomer(name1)
   $("#new-customer-name-input").val('')
   $(".customer-name-display").text(hotel.currentCustomer.name  + hotel.currentCustomer.id)
+    $(".customer-name").text(`Customer selected:${hotel.currentCustomer.name}`)
 })
 
 $("#main-page-button").on("click", () => {
