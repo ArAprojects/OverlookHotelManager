@@ -35,13 +35,24 @@ class Hotel {
     return this.rooms.length - this.bookings.filter(booking => booking.date === this.todaysDate).length
   }
 
-  findRoomsBooked() {
+  findMostPopularDate() {
     let allDates = this.bookings.map(booking => booking.date)
     let uniqueDates = [...new Set(allDates)]
     let filteredDates = uniqueDates.map(date1 => {
       return this.bookings.filter(booking => booking.date === date1)
     })
-    return filteredDates.sort(  (a, b) => b.length - a.length )[0][0].date
+    let finalDate = filteredDates.sort(  (a, b) => b.length - a.length )[0][0].date
+     return `The most popular date is ${finalDate} with ${filteredDates[0].length} rooms booked.`
+  }
+
+  findLeastPopularDate() {
+    let allDates = this.bookings.map(booking => booking.date)
+    let uniqueDates = [...new Set(allDates)]
+    let filteredDates = uniqueDates.map(date1 => {
+      return this.bookings.filter(booking => booking.date === date1)
+    })
+    let finalDate = filteredDates.sort(  (a, b) => a.length - b.length )[0][0].date
+     return `The least popular date is ${finalDate} with ${filteredDates[0].length} rooms booked.`
   }
 
 
