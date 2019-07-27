@@ -32,7 +32,8 @@ function makeHotel(rooms, bookings, roomService, users) {
    $(".date-display").text(hotel.todaysDate)
    $(".occupancy-display").text(`There are ${hotel.roomsAvailableforToday()} rooms available with an occupancy of ${hotel.percentRoomsOccupiedToday()} percent!`)
    $(".revenue-display").text(`${hotel.totalRevenueForToday()}$ was made today.`)
-   // console.log(hotel.currentCustomer)
+   $(".popular-display").text(hotel.findMostPopularDate())
+   $(".unpopular-display").text(hotel.findLeastPopularDate())
 }
 
 //
@@ -40,6 +41,9 @@ function makeHotel(rooms, bookings, roomService, users) {
 // - Total dollar amount spent on room service for a particular day
 // - Total dollar amount spent on room service for all days ever
 
+function displayCustomerSpecifiBookings() {
+  
+}
 
 
 function displayCustomerSpecificOrders() {
