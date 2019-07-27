@@ -56,7 +56,7 @@ class Hotel {
   }
 
   totalRevenueForToday() {
-    return this.totalOrderRevenue() + this.totalBookingRevenue()
+    return (this.totalOrderRevenue() + this.totalBookingRevenue()).toFixed(2)
   }
 
   addNewCustomer(name) {

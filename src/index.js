@@ -43,6 +43,7 @@ function displayOrdersToday() {
     $(".no-order-display").text("There are no orders today")
   }
   else {
+    $(".order-display").text("Todays orders are...")
     hotel.ordersToday().forEach( (order, index) => {
       $("table").append("<tr>")
       $("table").append("<td>" + order.userID)
