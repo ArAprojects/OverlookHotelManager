@@ -59,7 +59,6 @@ function displayCustomerSpecificOrders() {
     $(".specific-order-table").append("<td>" + order.totalCost)
     })
     $(".specific-order-total-display").text(`Total spent: $${hotel.currentCustomer.customerTotalSpentOnRoomService()}`)
-
   }
 }
 
@@ -104,7 +103,6 @@ $("#customer-search-button").on("click", () => {
      hotel.findCustomerByName(name)
   })
   $("table").text("")
-  $(".customer-name-display").text(hotel.currentCustomer.name  + hotel.currentCustomer.id)
   $(".customer-name").text(`Customer selected:${hotel.currentCustomer.name}`)
   hideNonSpecificDisplays()
   showSpecificDisplays()
@@ -121,11 +119,23 @@ $("#make-new-customer-name-button").on("click", () => {
   hotel.addNewCustomer(name1)
   $("#new-customer-name-input").val('')
   $("table").text("")
-  $(".customer-name-display").text(hotel.currentCustomer.name  + hotel.currentCustomer.id)
-    $(".customer-name").text(`Customer selected:${hotel.currentCustomer.name}`)
-    hideNonSpecificDisplays()
-    showSpecificDisplays()
+  $(".customer-name").text(`Customer selected:${hotel.currentCustomer.name}`)
+  hideNonSpecificDisplays()
+  showSpecificDisplays()
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 $("#main-page-button").on("click", () => {
   $("section").hide()
