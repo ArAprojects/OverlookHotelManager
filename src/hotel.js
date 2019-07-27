@@ -9,7 +9,7 @@ class Hotel {
     this.bookings = bookings.map(booking => new Booking(booking.userID, booking.date, booking.roomNumber))
     this.orders = orders.map(order => new Order(order.userID, order.date, order.food, order.totalCost))
     this.users = users.map(el => new Customer(el.id, el.name, this.bookings, this.orders))
-    this.todaysDate = null;
+    this.todaysDate = "2019/08/01";
     this.currentCustomer = null;
   }
 
@@ -37,12 +37,16 @@ class Hotel {
 
   percentRoomsOccupiedToday() {
       let occRooms = this.roomsBookedToday()
-      return ((occRooms / this.rooms.length) * 100).toFixed(2)
+      return ((occRooms / this.rooms.length) * 100).toFixed(0)
   }
 
   totalOrderRevenue() {
     let ordersToday = this.orders.filter(order => order.date === this.todaysDate)
      return ordersToday.reduce((acc, total) => acc + total.totalCost, 0)
+  }
+
+  ordersToday() {
+    return this.orders.filter(order => order.date === this.todaysDate)
   }
 
   totalBookingRevenue() {
@@ -52,7 +56,7 @@ class Hotel {
   }
 
   totalRevenueForToday() {
-    return this.totalOrderRevenue() + this.totalBookingRevenue()
+    return (this.totalOrderRevenue() + this.totalBookingRevenue()).toFixed(2)
   }
 
   addNewCustomer(name) {
@@ -75,8 +79,6 @@ class Hotel {
     let foundUser = this.users.find(customer => customer.name === name)
     this.currentCustomer = foundUser
   }
-
-
 
 
 
