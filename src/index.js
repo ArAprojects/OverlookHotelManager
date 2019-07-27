@@ -14,8 +14,9 @@ Promise.all([
 
 function makeHotel(rooms, bookings, roomService, users) {
    hotel = new Hotel(rooms, bookings,roomService, users)
-   hotel.giveTodaysDate()
+   // hotel.giveTodaysDate()
    hotel.giveallUsersBookingsandOrders()
+   displayOrdersToday()
 
    // hotel.addNewCustomer("bill")
    // hotel.createNewOrder("yummyfood", 12.55)
@@ -26,6 +27,7 @@ function makeHotel(rooms, bookings, roomService, users) {
    // console.log(hotel.roomsBookedToday())
    // console.log(hotel.totalRevenueForToday())
    // hotel.findCustomerByName("Brook Christiansen")
+   console.log(hotel.ordersToday())
    $(".date-display").text(hotel.todaysDate)
    $(".occupancy-display").text(`There are ${hotel.roomsAvailableforToday()} rooms available with an occupancy of ${hotel.percentRoomsOccupiedToday()} percent!`)
    $(".revenue-display").text(`${hotel.totalRevenueForToday()}$ was made today.`)
@@ -34,11 +36,24 @@ function makeHotel(rooms, bookings, roomService, users) {
 
 
 
-// Total Rooms Available for today's date
-// - Total revenue for today's date
-// - Percentage of rooms occupied for today's date
 
 
+function displayOrdersToday() {
+  if (hotel.ordersToday().length === 0) {
+    $(".no-order-display").text("There are no orders today")
+  }
+  else {
+    hotel.ordersToday().forEach( (order, index) => {
+      $("table").append("<tr>")
+      $("table").append("<td>" + order.userID)
+      $("table").append("<td>" + order.food)
+      $("table").append("<td>" + order.date)
+      $("table").append("<td>" + order.totalCost)
+      // $("table").html()
+      // $("table").html()
+    })
+  }
+}
 
 $("#customer-search-button").on("click", () => {
   $("#customer-search-input").on("keyup", () => {
@@ -58,8 +73,6 @@ $("#make-new-customer-name-button").on("click", () => {
   $("#new-customer-name-input").val('')
   $(".customer-name-display").text(hotel.currentCustomer.name  + hotel.currentCustomer.id)
 })
-
-
 
 $("#main-page-button").on("click", () => {
   $("section").hide()

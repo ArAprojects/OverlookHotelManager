@@ -9,7 +9,7 @@ class Hotel {
     this.bookings = bookings.map(booking => new Booking(booking.userID, booking.date, booking.roomNumber))
     this.orders = orders.map(order => new Order(order.userID, order.date, order.food, order.totalCost))
     this.users = users.map(el => new Customer(el.id, el.name, this.bookings, this.orders))
-    this.todaysDate = null;
+    this.todaysDate = "2019/08/01";
     this.currentCustomer = null;
   }
 
@@ -43,6 +43,10 @@ class Hotel {
   totalOrderRevenue() {
     let ordersToday = this.orders.filter(order => order.date === this.todaysDate)
      return ordersToday.reduce((acc, total) => acc + total.totalCost, 0)
+  }
+
+  ordersToday() {
+    return this.orders.filter(order => order.date === this.todaysDate)
   }
 
   totalBookingRevenue() {
