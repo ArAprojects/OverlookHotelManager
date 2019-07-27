@@ -9,7 +9,7 @@ class Hotel {
     this.bookings = bookings.map(booking => new Booking(booking.userID, booking.date, booking.roomNumber))
     this.orders = orders.map(order => new Order(order.userID, order.date, order.food, order.totalCost))
     this.users = users.map(el => new Customer(el.id, el.name, this.bookings, this.orders))
-    this.todaysDate = "2019/08/01";
+    this.todaysDate = "2019/08/02";
     this.currentCustomer = null;
   }
 

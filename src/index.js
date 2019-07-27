@@ -27,6 +27,7 @@ function makeHotel(rooms, bookings, roomService, users) {
    // console.log(hotel.roomsBookedToday())
    // console.log(hotel.totalRevenueForToday())
    // hotel.findCustomerByName("Brook Christiansen")
+
    console.log(hotel.ordersToday())
    $(".date-display").text(hotel.todaysDate)
    $(".occupancy-display").text(`There are ${hotel.roomsAvailableforToday()} rooms available with an occupancy of ${hotel.percentRoomsOccupiedToday()} percent!`)
@@ -47,7 +48,18 @@ function displayCustomerSpecificOrders() {
   }
   else {
     $(".customer-orders-message").text(`${hotel.currentCustomer.name} orders are...`)
-    $(".specific-order-table")
+    $(".specific-order-table").append("<tr>")
+    $(".specific-order-table").append("<td>" + "Food")
+    $(".specific-order-table").append("<td>" + "Date")
+    $(".specific-order-table").append("<td>" + "TotalCost")
+    hotel.currentCustomer.customerOrders.forEach(order => {
+    $(".specific-order-table").append("<tr>")
+    $(".specific-order-table").append("<td>" + order.food)
+    $(".specific-order-table").append("<td>" + order.date)
+    $(".specific-order-table").append("<td>" + order.totalCost)
+    })
+    $(".specific-order-total-display").text(`Total spent: $${hotel.currentCustomer.customerTotalSpentOnRoomService()}`)
+
   }
 }
 
@@ -91,10 +103,13 @@ $("#customer-search-button").on("click", () => {
     let name = $("#customer-search-input").val()
      hotel.findCustomerByName(name)
   })
+  $("table").text("")
   $(".customer-name-display").text(hotel.currentCustomer.name  + hotel.currentCustomer.id)
   $(".customer-name").text(`Customer selected:${hotel.currentCustomer.name}`)
   hideNonSpecificDisplays()
   showSpecificDisplays()
+
+  console.log(hotel.currentCustomer.customerTotalSpentOnRoomService())
 })
 
   let name1
@@ -105,6 +120,7 @@ $("#new-customer-name-input").on("keyup", () => {
 $("#make-new-customer-name-button").on("click", () => {
   hotel.addNewCustomer(name1)
   $("#new-customer-name-input").val('')
+  $("table").text("")
   $(".customer-name-display").text(hotel.currentCustomer.name  + hotel.currentCustomer.id)
     $(".customer-name").text(`Customer selected:${hotel.currentCustomer.name}`)
     hideNonSpecificDisplays()

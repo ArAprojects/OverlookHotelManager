@@ -22,6 +22,9 @@ class Customer {
     this.customerOrders = this.allOrders.filter(order => order.userID === this.id)
   }
 
+  customerTotalSpentOnRoomService() {
+    return this.customerOrders.reduce( (acc, total) => acc + total.totalCost, 0)
+  }
 
 
 }
