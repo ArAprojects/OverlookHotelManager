@@ -14,9 +14,9 @@ Promise.all([
 
 function makeHotel(rooms, bookings, roomService, users) {
    hotel = new Hotel(rooms, bookings,roomService, users)
-   // hotel.giveTodaysDate()
+   hotel.giveTodaysDate()
    hotel.giveallUsersBookingsandOrders()
-   displayOrdersToday()
+   displayOrdersToday("2019/08/19")
 
    // hotel.addNewCustomer("bill")
    // hotel.createNewOrder("yummyfood", 12.55)
@@ -27,31 +27,93 @@ function makeHotel(rooms, bookings, roomService, users) {
    // console.log(hotel.roomsBookedToday())
    // console.log(hotel.totalRevenueForToday())
    // hotel.findCustomerByName("Brook Christiansen")
-   console.log(hotel.ordersToday())
+
+
    $(".date-display").text(hotel.todaysDate)
    $(".occupancy-display").text(`There are ${hotel.roomsAvailableforToday()} rooms available with an occupancy of ${hotel.percentRoomsOccupiedToday()} percent!`)
    $(".revenue-display").text(`${hotel.totalRevenueForToday()}$ was made today.`)
    // console.log(hotel.currentCustomer)
 }
 
+//
+// - Breakdown of dates and dollar amounts for room service
+// - Total dollar amount spent on room service for a particular day
+// - Total dollar amount spent on room service for all days ever
 
 
 
+function displayCustomerSpecificOrders() {
+  if (hotel.currentCustomer.customerOrders === null) {
+    $(".customer-orders-message").text(`Sorry, ${hotel.currentCustomer.name} doesnt have any orders yet`)
+  }
+  else {
+    $(".customer-orders-message").text(`${hotel.currentCustomer.name} orders are...`)
+    $(".specific-order-table").append("<tr>")
+    $(".specific-order-table").append("<td>" + "Food")
+    $(".specific-order-table").append("<td>" + "Date")
+    $(".specific-order-table").append("<td>" + "TotalCost")
+    hotel.currentCustomer.customerOrders.forEach(order => {
+    $(".specific-order-table").append("<tr>")
+    $(".specific-order-table").append("<td>" + order.food)
+    $(".specific-order-table").append("<td>" + order.date)
+    $(".specific-order-table").append("<td>" + order.totalCost)
+    })
+    $(".specific-order-total-display").text(`Total spent: $${hotel.currentCustomer.customerTotalSpentOnRoomService()}`)
+  }
+}
 
-function displayOrdersToday() {
-  if (hotel.ordersToday().length === 0) {
+function hideNonSpecificDisplays() {
+  if (hotel.currentCustomer !== null)
+   {
+    $(".general-display").hide()
+  }
+}
+
+  function showSpecificDisplays() {
+    displayCustomerSpecificOrders()
+  }
+
+
+$(".order-search-button").on("click", () => {
+    searchForOrders()
+})
+
+  function searchForOrders() {
+    let date = $(".order-search-input").val()
+    displayOrdersToday(date)
+  }
+
+
+  $("#customer-search-button").on("click", () => {
+    $("#customer-search-input").on("keyup", () => {
+      let name = $("#customer-search-input").val()
+       hotel.findCustomerByName(name)
+    })
+    $("table").text("")
+    $(".customer-name").text(`Customer selected:${hotel.currentCustomer.name}`)
+  })
+
+
+
+function displayOrdersToday(date) {
+    $(".order-table").text('')
+  if (hotel.ordersToday(date).length === 0) {
     $(".no-order-display").text("There are no orders today")
   }
   else {
-    $(".order-display").text("Todays orders are...")
-    hotel.ordersToday().forEach( (order, index) => {
-      $("table").append("<tr>")
-      $("table").append("<td>" + order.userID)
-      $("table").append("<td>" + order.food)
-      $("table").append("<td>" + order.date)
-      $("table").append("<td>" + order.totalCost)
-      // $("table").html()
-      // $("table").html()
+      $(".no-order-display").text('')
+      $(".order-display").text(`Orders for ${date}`)
+      $(".order-table").append("<tr>")
+      $(".order-table").append("<td>" + "ID")
+      $(".order-table").append("<td>" + "Food")
+      $(".order-table").append("<td>" + "Date")
+      $(".order-table").append("<td>" + "TotalCost")
+    hotel.ordersToday(date).forEach(order => {
+      $(".order-table").append("<tr>")
+      $(".order-table").append("<td>" + order.userID)
+      $(".order-table").append("<td>" + order.food)
+      $(".order-table").append("<td>" + order.date)
+      $(".order-table").append("<td>" + order.totalCost)
     })
   }
 }
@@ -61,7 +123,10 @@ $("#customer-search-button").on("click", () => {
     let name = $("#customer-search-input").val()
      hotel.findCustomerByName(name)
   })
-  $(".customer-name-display").text(hotel.currentCustomer.name  + hotel.currentCustomer.id)
+  $("table").text("")
+  $(".customer-name").text(`Customer selected:${hotel.currentCustomer.name}`)
+  hideNonSpecificDisplays()
+  showSpecificDisplays()
 })
 
   let name1
@@ -72,8 +137,24 @@ $("#new-customer-name-input").on("keyup", () => {
 $("#make-new-customer-name-button").on("click", () => {
   hotel.addNewCustomer(name1)
   $("#new-customer-name-input").val('')
-  $(".customer-name-display").text(hotel.currentCustomer.name  + hotel.currentCustomer.id)
+  $("table").text("")
+  $(".customer-name").text(`Customer selected:${hotel.currentCustomer.name}`)
+  hideNonSpecificDisplays()
+  showSpecificDisplays()
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 $("#main-page-button").on("click", () => {
   $("section").hide()

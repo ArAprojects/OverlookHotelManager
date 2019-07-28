@@ -11,8 +11,9 @@
       <header>
         <button type="button" name="button" id="main-page-button">Home</button>
         <button type="button" name="button" id="orders-button">Orders</button>
-        <button type="button" name="button" id="rooms-button">Rooms</button>
+        <button type="button" name="button" id="rooms-button">Bookings</button>
         <button type="button" name="button" id="customer-button">Customer</button>
+        <h2 class="customer-name"></h2>
       </header>
       <section class="main-page">
         <h2>Main</h2>
@@ -25,19 +26,28 @@
       </section>
       <section class="orders" style="display: none">
         <h2>Orders</h2>
-        <div class="order-display-box">
+        <div class="general-display order-display-box">
           <div class="no-order-display">
           </div>
+          <p>Search yyyy/mm/dd for orders</p>
+          <input class="order-search-input" type="text" name="" value="">
+          <button class="order-search-button" type="button" name="button">find</button>
           <div class="order-display">
           </div>
           <table class="order-table">
           </table>
         </div>
         <div class="customer-orders-display">
+          <div class="customer-orders-message">
+          </div>
+          <table class="specific-order-table">
+          </table>
+          <div class="specific-order-total-display">
+          </div>
         </div>
       </section>
       <section class="rooms" style="display: none">
-        <h2>Rooms</h2>
+        <h2>Bookings</h2>
       </section>
       <section class="customer" style="display: none">
         <h2>Customer</h2>
