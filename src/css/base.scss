@@ -93,3 +93,9 @@ table {
 .customer-display-box {
   margin: 50px;
 }
+
+.customer-bookings-list-box {
+  border: 1px solid black;
+  max-height: 300px;
+  overflow: scroll;
+}
