@@ -40,14 +40,17 @@ function makeHotel(rooms, bookings, roomService, users) {
 // I will also see an input that will allow me to search for what rooms are available for a specified date.
 
 function displayCustomerSpecifiBookings() {
-    if (hotel.currentCustomer.customerBookings === null) {
+    if (hotel.currentCustomer.customerBookings === null || []) {
       $(".customer-bookings-message").text(`Sorry, ${hotel.currentCustomer.name} doesnt have any bookings yet`)
+    }
+    else {
+      $(".customer-bookings-message").text("not ready yet")
     }
 }
 
 
 function displayCustomerSpecificOrders() {
-  if (hotel.currentCustomer.customerOrders === null) {
+  if (hotel.currentCustomer.customerOrders === null || [] ) {
     $(".customer-orders-message").text(`Sorry, ${hotel.currentCustomer.name} doesnt have any orders yet`)
   }
   else {
@@ -79,12 +82,6 @@ function hideNonSpecificDisplays() {
   }
 
 
-$(".order-search-button").on("click", () => {
-    searchForOrders()
-})
-
-
-
 
 function displayAvailableBookings(date) {
   let availrooms = hotel.availableBookingsByDate(date)
@@ -109,14 +106,21 @@ function displayAvailableBookings(date) {
     searchForBookings()
   });
 
+  $(".order-search-button").on("click", () => {
+      searchForOrders()
+  })
+
+
+
+function searchForCustomer () {
+  let name = $("#customer-search-input").val()
+   hotel.findCustomerByName(name)
+   $("table").text("")
+   $(".customer-name").text(`Customer selected:${hotel.currentCustomer.name}`)
+}
 
   $("#customer-search-button").on("click", () => {
-    $("#customer-search-input").on("keyup", () => {
-      let name = $("#customer-search-input").val()
-       hotel.findCustomerByName(name)
-    })
-    $("table").text("")
-    $(".customer-name").text(`Customer selected:${hotel.currentCustomer.name}`)
+    searchForCustomer
   })
 
 
