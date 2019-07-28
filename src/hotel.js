@@ -71,6 +71,13 @@ class Hotel {
     return this.orders.filter(order => order.date === date)
   }
 
+  bookingsByDate(date) {
+    let booked = this.bookings.filter(booking => booking.date === date)
+    let bookedNum = booked.map(booking => booking.roomNumber)
+    return this.rooms.filter(room => !bookedNum.includes(room.number))
+    
+  }
+
   totalBookingRevenue() {
     let bookingsToday = this.bookings.filter(booking => booking.date === this.todaysDate)
     let roomsbooked = bookingsToday.map(booking => this.rooms.find(room => room.number === booking.roomNumber))
