@@ -16,58 +16,17 @@ function makeHotel(rooms, bookings, roomService, users) {
    hotel = new Hotel(rooms, bookings,roomService, users)
    hotel.giveTodaysDate()
    hotel.giveallUsersBookingsandOrders()
-   displayOrdersToday("2019/08/19")
-
-   // hotel.addNewCustomer("bill")
-   // hotel.createNewOrder("yummyfood", 12.55)
+   displayOrdersToday(hotel.todaysDate)
    console.log(hotel.users)
-   // hotel.currentCustomer.findCurrentCustomerData()
-   // console.log(hotel.roomsAvailableforToday())
-   // console.log(hotel.percentRoomsOccupiedToday())
-   // console.log(hotel.roomsBookedToday())
-   // console.log(hotel.totalRevenueForToday())
-   // hotel.findCustomerByName("Brook Christiansen")
-   console.log(hotel.findMostPopularDate())
-   console.log(hotel.availableBookingsByDate("2019/07/23"))
    $(".date-display").text(hotel.todaysDate)
    $(".occupancy-display").text(`There are ${hotel.roomsAvailableforToday()} rooms available with an occupancy of ${hotel.percentRoomsOccupiedToday()} percent!`)
    $(".revenue-display").text(`${hotel.totalRevenueForToday()}$ was made today.`)
    $(".popular-display").text(hotel.findMostPopularDate())
    $(".unpopular-display").text(hotel.findLeastPopularDate())
-
-}
-
-// I will also see an input that will allow me to search for what rooms are available for a specified date.
-
-function displayCustomerSpecifiBookings() {
-    if (hotel.currentCustomer.customerBookings === null || hotel.currentCustomer.customerBookings.length === 0) {
-      $(".customer-bookings-message").text(`Sorry, ${hotel.currentCustomer.name} doesnt have any bookings yet`)
-    }
-    else {
-      $(".customer-bookings-message").text(`${hotel.currentCustomer.name} bookings are...`)
-    }
 }
 
 
-function displayCustomerSpecificOrders() {
-  if (hotel.currentCustomer.customerOrders === null || hotel.currentCustomer.customerOrders.length === 0 ) {
-    $(".customer-orders-message").text(`Sorry, ${hotel.currentCustomer.name} doesnt have any orders yet`)
-  }
-  else {
-    $(".customer-orders-message").text(`${hotel.currentCustomer.name} orders are...`)
-    $(".specific-order-table").append("<tr>")
-    $(".specific-order-table").append("<td>" + "Food")
-    $(".specific-order-table").append("<td>" + "Date")
-    $(".specific-order-table").append("<td>" + "TotalCost")
-    hotel.currentCustomer.customerOrders.forEach(order => {
-    $(".specific-order-table").append("<tr>")
-    $(".specific-order-table").append("<td>" + order.food)
-    $(".specific-order-table").append("<td>" + order.date)
-    $(".specific-order-table").append("<td>" + order.totalCost)
-    })
-    $(".specific-order-total-display").text(`Total spent: $${hotel.currentCustomer.customerTotalSpentOnRoomService()}`)
-  }
-}
+
 
 function hideNonSpecificDisplays() {
   if (hotel.currentCustomer !== null)
@@ -78,7 +37,7 @@ function hideNonSpecificDisplays() {
 
   function showSpecificDisplays() {
     displayCustomerSpecificOrders()
-    displayCustomerSpecifiBookings()
+    displayCustomerSpecificBookings()
   }
 
 
@@ -140,6 +99,21 @@ function displayAvailableBookings(date) {
 
 
 
+  function displayCustomerSpecificBookings() {
+      if (hotel.currentCustomer.customerBookings === null || hotel.currentCustomer.customerBookings.length === 0) {
+        $(".customer-bookings-message").text(`Sorry, ${hotel.currentCustomer.name} doesnt have any bookings yet`)
+      }
+      else {
+        $(".customer-bookings-list-box").show()
+        $(".customer-bookings-message").text(`${hotel.currentCustomer.name} bookings are...`)
+        hotel.currentCustomer.customerBookings.forEach(booking => {
+          $(".customer-bookings-list-box").append("<h4>" + "Date Booked: " + booking.date + " Room number: " + booking.roomNumber)
+        })
+      }
+  }
+
+
+
 function displayOrdersToday(date) {
     $(".order-table").text('')
   if (hotel.ordersToday(date).length === 0) {
@@ -160,6 +134,26 @@ function displayOrdersToday(date) {
       $(".order-table").append("<td>" + order.date)
       $(".order-table").append("<td>" + order.totalCost)
     })
+  }
+}
+
+function displayCustomerSpecificOrders() {
+  if (hotel.currentCustomer.customerOrders === null || hotel.currentCustomer.customerOrders.length === 0 ) {
+    $(".customer-orders-message").text(`Sorry, ${hotel.currentCustomer.name} doesnt have any orders yet`)
+  }
+  else {
+    $(".customer-orders-message").text(`${hotel.currentCustomer.name} orders are...`)
+    $(".specific-order-table").append("<tr>")
+    $(".specific-order-table").append("<td>" + "Food")
+    $(".specific-order-table").append("<td>" + "Date")
+    $(".specific-order-table").append("<td>" + "TotalCost")
+    hotel.currentCustomer.customerOrders.forEach(order => {
+    $(".specific-order-table").append("<tr>")
+    $(".specific-order-table").append("<td>" + order.food)
+    $(".specific-order-table").append("<td>" + order.date)
+    $(".specific-order-table").append("<td>" + order.totalCost)
+    })
+    $(".specific-order-total-display").text(`Total spent: $${hotel.currentCustomer.customerTotalSpentOnRoomService()}`)
   }
 }
 
