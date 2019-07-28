@@ -28,12 +28,13 @@ function makeHotel(rooms, bookings, roomService, users) {
    // console.log(hotel.totalRevenueForToday())
    // hotel.findCustomerByName("Brook Christiansen")
    console.log(hotel.findMostPopularDate())
-   console.log(hotel.bookingsByDate("2019/08/19"))
+   console.log(hotel.availableBookingsByDate("2019/07/23"))
    $(".date-display").text(hotel.todaysDate)
    $(".occupancy-display").text(`There are ${hotel.roomsAvailableforToday()} rooms available with an occupancy of ${hotel.percentRoomsOccupiedToday()} percent!`)
    $(".revenue-display").text(`${hotel.totalRevenueForToday()}$ was made today.`)
    $(".popular-display").text(hotel.findMostPopularDate())
    $(".unpopular-display").text(hotel.findLeastPopularDate())
+
 }
 
 // I will also see an input that will allow me to search for what rooms are available for a specified date.
@@ -82,10 +83,16 @@ $(".order-search-button").on("click", () => {
     searchForOrders()
 })
 
-// $(".booking-search-button").on("click", () => {
-//     searchForBookings()
-// })
 
+
+
+function displayAvailableBookings(date) {
+  let availrooms = hotel.availableBookingsByDate(date)
+  availrooms.forEach(room => {
+    $(".available-rooms").append("<option>" + "Room Number: " + room.number
+     + " Room Type: " + room.roomType)
+  })
+}
 
 
   function searchForOrders() {
@@ -93,11 +100,15 @@ $(".order-search-button").on("click", () => {
     displayOrdersToday(date)
   }
 
-  // function searchForBookings() {
-  //   let date = $(".booking-search-input").val()
-  //   displayBookingsToday(date)
-  // }
-  //
+  function searchForBookings() {
+    let date = $(".booking-search-input").val()
+    displayAvailableBookings(date)
+  }
+
+  $(".booking-search-button").on("click", () => {
+    searchForBookings()
+  });
+
 
   $("#customer-search-button").on("click", () => {
     $("#customer-search-input").on("keyup", () => {

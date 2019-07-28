@@ -56,7 +56,6 @@ class Hotel {
   }
 
 
-
   percentRoomsOccupiedToday() {
       let occRooms = this.roomsBookedToday()
       return ((occRooms / this.rooms.length) * 100).toFixed(0)
@@ -71,11 +70,10 @@ class Hotel {
     return this.orders.filter(order => order.date === date)
   }
 
-  bookingsByDate(date) {
+  availableBookingsByDate(date) {
     let booked = this.bookings.filter(booking => booking.date === date)
     let bookedNum = booked.map(booking => booking.roomNumber)
     return this.rooms.filter(room => !bookedNum.includes(room.number))
-    
   }
 
   totalBookingRevenue() {
