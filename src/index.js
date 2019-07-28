@@ -26,8 +26,6 @@ function makeHotel(rooms, bookings, roomService, users) {
 }
 
 
-
-
 function hideNonSpecificDisplays() {
   if (hotel.currentCustomer !== null)
    {
@@ -41,11 +39,11 @@ function hideNonSpecificDisplays() {
   }
 
 
-
 function displayAvailableBookings(date) {
+  $(".available-rooms-box").show()
   let availrooms = hotel.availableBookingsByDate(date)
   availrooms.forEach(room => {
-    $(".available-rooms").append("<option>" + "Room Number: " + room.number
+    $(".available-rooms-box").append("<h4>" + "Room Number: " + room.number
      + " Room Type: " + room.roomType)
   })
 }
@@ -91,6 +89,7 @@ function displayAvailableBookings(date) {
 
   $("#customer-search-button").on("click", () => {
     searchForCustomer()
+    console.log(hotel.doesCustomerHaveBookingToday())
   })
 
   $("#make-new-customer-name-button").on("click", () => {
@@ -98,14 +97,25 @@ function displayAvailableBookings(date) {
   })
 
 
+  function makeNewBooking() {
+    if (hotel.doesCustomerHaveBookingToday() === null) {
+      $(".customer-bookings-message").text(`Looks like ${hotel.currentCustomer.name} has no bookings for today, click the button below to get a new booking started`)
+    }
+    else {
+      $(".customer-bookings-message").text(`${hotel.currentCustomer.name} already has booked room number ${hotel.doesCustomerHaveBookingToday()[0].roomNumber} for today, click the button below to change todays booking`)
+    }
+  }
+
 
   function displayCustomerSpecificBookings() {
       if (hotel.currentCustomer.customerBookings === null || hotel.currentCustomer.customerBookings.length === 0) {
-        $(".customer-bookings-message").text(`Sorry, ${hotel.currentCustomer.name} doesnt have any bookings yet`)
+        // $(".customer-bookings-message").text(`Sorry, ${hotel.currentCustomer.name} doesnt have any bookings yet`)
+        makeNewBooking()
       }
       else {
+        makeNewBooking()
         $(".customer-bookings-list-box").show()
-        $(".customer-bookings-message").text(`${hotel.currentCustomer.name} bookings are...`)
+        $(".customer-bookings-message").append("<h4>" + `${hotel.currentCustomer.name} bookings are...`)
         hotel.currentCustomer.customerBookings.forEach(booking => {
           $(".customer-bookings-list-box").append("<h4>" + "Date Booked: " + booking.date + " Room number: " + booking.roomNumber)
         })

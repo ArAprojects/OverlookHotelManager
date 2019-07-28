@@ -94,7 +94,8 @@ table {
   margin: 50px;
 }
 
-.customer-bookings-list-box {
+.customer-bookings-list-box,
+.available-rooms-box {
   border: 1px solid black;
   max-height: 300px;
   overflow: scroll;

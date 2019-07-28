@@ -107,7 +107,14 @@ class Hotel {
     this.currentCustomer = foundUser
   }
 
-
+  doesCustomerHaveBookingToday() {
+    if (this.currentCustomer.customerBookings.filter(booking => booking.date === this.todaysDate).length === 0) {
+      return null
+    }
+    else {
+      return this.currentCustomer.customerBookings.filter(booking => booking.date === this.todaysDate)
+    }
+  }
 
 }
 

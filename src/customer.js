@@ -4,8 +4,8 @@ class Customer {
     this.name = name;
     this.allBookings = allBookings || []
     this.allOrders = allOrders || []
-    this.customerBookings = null
-    this.customerOrders = null
+    this.customerBookings = null || []
+    this.customerOrders = null || []
   }
 
 
