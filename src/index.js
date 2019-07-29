@@ -4,7 +4,6 @@ import './images/office.png'
 import Hotel from '../src/hotel.js'
 var hotel
 
-
 Promise.all([
   fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms").then(response => response.json()),
   fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings").then(response => response.json()),
@@ -19,12 +18,23 @@ function makeHotel(rooms, bookings, roomService, users) {
    displayOrdersToday(hotel.todaysDate)
    console.log(hotel.users)
    $(".date-display").text(hotel.todaysDate)
-   $(".occupancy-display").text(`There are ${hotel.roomsAvailableforToday()} rooms available with an occupancy of ${hotel.percentRoomsOccupiedToday()} percent!`)
+   $(".occupancy-display").text(`There are ${hotel.roomsAvailableforToday()} rooms available today with an occupancy of ${hotel.percentRoomsOccupiedToday()} percent!`)
    $(".revenue-display").text(`${hotel.totalRevenueForToday()}$ was made today.`)
    $(".popular-display").text(hotel.findMostPopularDate())
    $(".unpopular-display").text(hotel.findLeastPopularDate())
 }
 
+
+  function createNewBooking() {
+    $(".customer-bookings-display").hide()
+    $(".new-booking-box").show()
+    displayAvailableBookings(hotel.todaysDate)
+  }
+
+  $(".new-booking-button").on("click", () => {
+    createNewBooking()
+
+  })
 
 function hideNonSpecificDisplays() {
   if (hotel.currentCustomer !== null)
@@ -41,7 +51,8 @@ function hideNonSpecificDisplays() {
 
 function displayAvailableBookings(date) {
   $(".available-rooms-box").show()
-  let availrooms = hotel.availableBookingsByDate(date)
+  $(".available-rooms-box").text('')
+  let availrooms = hotel.availableRoomsByDate(date)
   availrooms.forEach(room => {
     $(".available-rooms-box").append("<h4>" + "Room Number: " + room.number
      + " Room Type: " + room.roomType)
@@ -111,6 +122,7 @@ function displayAvailableBookings(date) {
       if (hotel.currentCustomer.customerBookings === null || hotel.currentCustomer.customerBookings.length === 0) {
         // $(".customer-bookings-message").text(`Sorry, ${hotel.currentCustomer.name} doesnt have any bookings yet`)
         makeNewBooking()
+        $(".new-booking-button").show()
       }
       else {
         makeNewBooking()

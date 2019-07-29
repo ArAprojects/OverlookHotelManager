@@ -31,6 +31,8 @@ class Hotel {
     return this.bookings.filter(booking => booking.date === this.todaysDate).length
   }
 
+
+
   roomsAvailableforToday() {
     return this.rooms.length - this.bookings.filter(booking => booking.date === this.todaysDate).length
   }
@@ -70,11 +72,14 @@ class Hotel {
     return this.orders.filter(order => order.date === date)
   }
 
-  availableBookingsByDate(date) {
+  availableRoomsByDate(date) {
     let booked = this.bookings.filter(booking => booking.date === date)
     let bookedNum = booked.map(booking => booking.roomNumber)
     return this.rooms.filter(room => !bookedNum.includes(room.number))
   }
+
+
+
 
   totalBookingRevenue() {
     let bookingsToday = this.bookings.filter(booking => booking.date === this.todaysDate)
