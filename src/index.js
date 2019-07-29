@@ -54,8 +54,8 @@ function displayAvailableBookings(date) {
   $(".available-rooms-box").text('')
   let availrooms = hotel.availableRoomsByDate(date)
   availrooms.forEach(room => {
-    $(".available-rooms-box").append("<h4>" + "Room Number: " + room.number
-     + " Room Type: " + room.roomType)
+    $(".available-rooms-box").append("<h4>" + " Number: " + room.number
+     + " Type: " + room.roomType + " Bidet: " + room.bidet)
   })
 }
 
