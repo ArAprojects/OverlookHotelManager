@@ -17,6 +17,11 @@ class Hotel {
     this.users.forEach(user => user.findCurrentCustomerData())
   }
 
+  giveMenu() {
+    let orders = [...this.orders]
+    orders.sort(() => Math.random() - 0.5);
+    return orders.slice(0, 10)
+  }
 
   giveTodaysDate() {
     var today = new Date();
@@ -76,6 +81,7 @@ class Hotel {
     console.log(booked)
     return this.rooms.filter(room => !bookedNum.includes(room.number))
   }
+
 
   totalBookingRevenue() {
     let bookingsToday = this.bookings.filter(booking => booking.date === this.todaysDate)

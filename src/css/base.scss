@@ -30,10 +30,11 @@ h3  {
   margin-left: auto;
 }
 
+
 section {
   height: 87vh;
   font-weight: bold;
-  font-size: 2em;
+  font-size: 1.6em;
 }
 
 button {
@@ -48,6 +49,7 @@ button {
 
 table {
   border-spacing: 20px;
+  font-size: .6em;
 }
 
 .darkgrey-button {
@@ -103,10 +105,13 @@ table {
 }
 
 .customer-bookings-list-box,
-.available-rooms-box {
+.available-rooms-box,
+.menu {
   border: 1px solid black;
   max-height: 300px;
   overflow: scroll;
+  width: 75%;
+  margin: auto;
 }
 
 .dash-displays {
@@ -122,9 +127,4 @@ table {
   width: 40%;
   background-color: #a9a9a980;
   margin-right: 10px;
-}
-
-.available-rooms-box {
-  width: 75%;
-  margin: auto;
 }

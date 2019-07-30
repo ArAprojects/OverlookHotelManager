@@ -11,12 +11,14 @@ Promise.all([
   fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users").then(response => response.json())]
 ).then(data => makeHotel(data[0].rooms, data[1].bookings, data[2].roomServices, data[3].users))
 
-function makeHotel(rooms, bookings, roomService, users) {
-   hotel = new Hotel(rooms, bookings,roomService, users)
+function makeHotel(rooms, bookings, roomServices, users) {
+   hotel = new Hotel(rooms, bookings, roomServices, users)
    hotel.giveTodaysDate()
    hotel.giveallUsersBookingsandOrders()
    displayOrdersToday(hotel.todaysDate)
    console.log(hotel.users)
+   console.log(hotel.orders)
+   console.log(hotel.giveMenu())
    $(".date-display").text(`Welcome, todays date is: ${hotel.todaysDate}`)
    $(".occupancy-display").text(`There are ${hotel.roomsAvailableforToday()} rooms available today with an occupancy of ${hotel.percentRoomsOccupiedToday()} percent!`)
    $(".revenue-display").text(`${hotel.totalRevenueForToday()}$ was made today.`)
@@ -41,6 +43,17 @@ function makeHotel(rooms, bookings, roomService, users) {
   })
 
 
+  function makeNewOrder() {
+    $(".new-orders-box").show()
+    $(".menu").text("")
+    $(".selection").text("")
+    let menuList = hotel.giveMenu()
+    menuList.forEach(item => {
+      $(".menu").append("<h5>" + item.food + " Cost: " + item.totalCost)
+    })
+
+  }
+
 
   function lookForNewBooking() {
     $(".customer-bookings-display").hide()
@@ -51,6 +64,24 @@ function makeHotel(rooms, bookings, roomService, users) {
   $(".new-booking-button").on("click", () => {
     lookForNewBooking()
   })
+
+  $(".new-orders-button").on("click", () => {
+    makeNewOrder()
+  })
+
+  $(".menu").on("click", (e) => {
+    let value = $(e.target).closest($("h5")).text()
+    let newval = value.split("Cost")[0]
+    let costVal = value.split(" ")[4]
+    $(".selection").text(`Your selection is: ${newval}`)
+    $(".confirm").on("click", () => {
+      hotel.createNewOrder(newval, parseInt(costVal))
+    })
+    console.log(hotel.currentCustomer)
+  })
+
+
+
 
   function checkBoxManager(e) {
     $(".available-rooms-box").text('')
@@ -158,7 +189,6 @@ function displayAvailableBookings(date1) {
   function displayCustomerSpecificBookings() {
     $(".customer-bookings-list-box").text("")
       if (hotel.currentCustomer.customerBookings === null || hotel.currentCustomer.customerBookings.length === 0) {
-        // $(".customer-bookings-message").text(`Sorry, ${hotel.currentCustomer.name} doesnt have any bookings yet`)
         makeNewBooking()
         $(".new-booking-button").show()
       }
@@ -201,6 +231,7 @@ function displayOrdersToday(date) {
 function displayCustomerSpecificOrders() {
   if (hotel.currentCustomer.customerOrders === null || hotel.currentCustomer.customerOrders.length === 0 ) {
     $(".customer-orders-message").text(`Sorry, ${hotel.currentCustomer.name} doesnt have any orders yet`)
+    $(".new-orders-button").show()
   }
   else {
     $(".customer-orders-message").text(`${hotel.currentCustomer.name} orders are...`)
