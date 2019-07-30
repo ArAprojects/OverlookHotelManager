@@ -16,16 +16,16 @@
         <h2 class="customer-name"></h2>
       </header>
       <section class="main-page">
-        <h2>Main</h2>
-        <div class="date-display">
-        </div>
+        <h3 class="date-display"></h3>
+      <div class="dash-displays">
         <div class="occupancy-display">
         </div>
         <div class="revenue-display">
         </div>
+      </div>
       </section>
       <section class="orders" style="display: none">
-        <h2>Orders</h2>
+        <h3>Orders</h3>
         <div class="general-display order-display-box">
           <div class="no-order-display">
           </div>
@@ -47,10 +47,46 @@
         </div>
       </section>
       <section class="rooms" style="display: none">
-        <h2>Bookings</h2>
+        <h3>Bookings</h3>
+        <div class="general-display bookings-display-box">
+          <div class="popular-display">
+          </div>
+          <div class="unpopular-display">
+          </div>
+          <h4>Below You can Search for bookings on a given day yyyy/mm/dd</h4>
+          <input class="booking-search-input" type="text" name="" value="">
+          <button class="booking-search-button" type="button" name="button">find</button>
+          <div class="available-rooms-box" name="" style="display: none;">
+          </div>
+        </div>
+        <div class="customer-bookings-display">
+          <div class="customer-bookings-message">
+          </div>
+            <button class="new-booking-button" type="button" name="button" style="display: none;">New Booking</button>
+          <div class="customer-bookings-list-box" style="display: none;">
+          </div>
+        </div>
+        <div class="new-booking-box" style="display: none;">
+          <h4>Current Rooms available for today, filter by...</h4>
+          <label for="single-room">single room</label>
+          <input class"single-room" type="checkbox" name="" value="single room">
+          <label for="suite">suite</label>
+          <input class"suite" type="checkbox" name="" value="suite">
+          <label for="junior-suite">junior suite</label>
+          <input class"junior-suite" type="checkbox" name="" value="junior suite">
+          <label for="residential-suite">residential suite</label>
+          <input class"residential-suite" type="checkbox" name="" value="residential suite">
+          <div class="available-rooms-box">
+          </div>
+          <div class="make-booking-box">
+            <h4>Type in a room number and hit submit to make a booking</h4>
+            <input class="make-booking-input"  type="text" name="" value="">
+            <button class="make-booking-button" type="button" name="button">Make Booking</button>
+          </div>
+        </div>
       </section>
       <section class="customer" style="display: none">
-        <h2>Customer</h2>
+        <h3>Customer</h3>
         <div class="new-customer-box">
           <input id="new-customer-name-input" type="text" name="" value="">
           <button id="make-new-customer-name-button" type="button" name="button"> New</button>

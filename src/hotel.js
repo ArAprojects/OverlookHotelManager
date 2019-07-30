@@ -35,6 +35,26 @@ class Hotel {
     return this.rooms.length - this.bookings.filter(booking => booking.date === this.todaysDate).length
   }
 
+  findMostPopularDate() {
+    let allDates = this.bookings.map(booking => booking.date)
+    let uniqueDates = [...new Set(allDates)]
+    let filteredDates = uniqueDates.map(date1 => {
+      return this.bookings.filter(booking => booking.date === date1)
+    })
+    let finalDate = filteredDates.sort(  (a, b) => b.length - a.length )[0][0].date
+     return `The most popular date is ${finalDate} with ${filteredDates[0].length} rooms booked.`
+  }
+
+  findLeastPopularDate() {
+    let allDates = this.bookings.map(booking => booking.date)
+    let uniqueDates = [...new Set(allDates)]
+    let filteredDates = uniqueDates.map(date1 => {
+      return this.bookings.filter(booking => booking.date === date1)
+    })
+    let finalDate = filteredDates.sort(  (a, b) => a.length - b.length )[0][0].date
+     return `The least popular date is ${finalDate} with ${filteredDates[0].length} rooms booked.`
+  }
+
 
   percentRoomsOccupiedToday() {
       let occRooms = this.roomsBookedToday()
@@ -48,6 +68,13 @@ class Hotel {
 
   ordersToday(date) {
     return this.orders.filter(order => order.date === date)
+  }
+
+  availableRoomsByDate(date) {
+    let booked = this.bookings.filter(booking => booking.date === date)
+    let bookedNum = booked.map(booking => booking.roomNumber)
+    console.log(booked)
+    return this.rooms.filter(room => !bookedNum.includes(room.number))
   }
 
   totalBookingRevenue() {
@@ -81,7 +108,14 @@ class Hotel {
     this.currentCustomer = foundUser
   }
 
-
+  doesCustomerHaveBookingToday() {
+    if (this.currentCustomer.customerBookings.filter(booking => booking.date === this.todaysDate).length === 0) {
+      return null
+    }
+    else {
+      return this.currentCustomer.customerBookings.filter(booking => booking.date === this.todaysDate)
+    }
+  }
 
 }
 
