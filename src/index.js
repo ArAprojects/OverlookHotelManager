@@ -37,10 +37,7 @@ function makeHotel(rooms, bookings, roomService, users) {
 
   $(".make-booking-button").on("click", () => {
     submitNewBooking()
-
     console.log(hotel.currentCustomer.customerBookings)
-
-
   })
 
 
@@ -167,6 +164,7 @@ function displayAvailableBookings(date1) {
       }
       else {
         makeNewBooking()
+        $(".new-booking-button").show()
         $(".customer-bookings-list-box").show()
         $(".customer-bookings-message").append("<h5>" + `${hotel.currentCustomer.name} bookings are...`)
         hotel.currentCustomer.customerBookings.forEach(booking => {
@@ -227,6 +225,9 @@ $("#main-page-button").on("click", () => {
   $(".main-page").show()
   $("button").css("background-color", "#585555");
   $("#main-page-button").css("background-color", "darkgrey")
+  $(".revenue-display").text(`${hotel.totalRevenueForToday()}$ was made today.`)
+  $(".occupancy-display").text(`There are ${hotel.roomsAvailableforToday()} rooms available today with an occupancy of ${hotel.percentRoomsOccupiedToday()} percent!`)
+
 })
 
 $("#orders-button").on("click", () => {
