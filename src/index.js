@@ -43,6 +43,14 @@ function makeHotel(rooms, bookings, roomServices, users) {
   })
 
 
+
+
+  function lookForNewBooking() {
+    $(".customer-bookings-display").hide()
+    $(".new-booking-box").show()
+    displayAvailableBookings(hotel.todaysDate)
+  }
+
   function makeNewOrder() {
     $(".new-orders-box").show()
     $(".menu").text("")
@@ -51,15 +59,8 @@ function makeHotel(rooms, bookings, roomServices, users) {
     menuList.forEach(item => {
       $(".menu").append("<h5>" + item.food + " Cost: " + item.totalCost)
     })
-
   }
 
-
-  function lookForNewBooking() {
-    $(".customer-bookings-display").hide()
-    $(".new-booking-box").show()
-    displayAvailableBookings(hotel.todaysDate)
-  }
 
   $(".new-booking-button").on("click", () => {
     lookForNewBooking()
@@ -77,7 +78,11 @@ function makeHotel(rooms, bookings, roomServices, users) {
     $(".confirm").on("click", () => {
       hotel.createNewOrder(newval, parseInt(costVal))
     })
-    console.log(hotel.currentCustomer)
+  })
+
+  $(".confirm").on("click", () => {
+    $(".new-orders-box").hide()
+    
   })
 
 
