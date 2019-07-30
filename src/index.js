@@ -17,7 +17,7 @@ function makeHotel(rooms, bookings, roomService, users) {
    hotel.giveallUsersBookingsandOrders()
    displayOrdersToday(hotel.todaysDate)
    console.log(hotel.users)
-   $(".date-display").text(hotel.todaysDate)
+   $(".date-display").text(`Welcome, todays date is: ${hotel.todaysDate}`)
    $(".occupancy-display").text(`There are ${hotel.roomsAvailableforToday()} rooms available today with an occupancy of ${hotel.percentRoomsOccupiedToday()} percent!`)
    $(".revenue-display").text(`${hotel.totalRevenueForToday()}$ was made today.`)
    $(".popular-display").text(hotel.findMostPopularDate())
@@ -25,31 +25,51 @@ function makeHotel(rooms, bookings, roomService, users) {
 }
 
 
-  function createNewBooking() {
+  function submitNewBooking() {
+    let roomNumber = parseInt($(".make-booking-input").val())
+    hotel.createNewBooking(roomNumber)
+    $(".make-booking-input").val("")
+    $(".new-booking-box").hide()
+    $(".customer-bookings-display").show()
+    displayCustomerSpecificBookings()
+  }
+
+
+  $(".make-booking-button").on("click", () => {
+    submitNewBooking()
+
+    console.log(hotel.currentCustomer.customerBookings)
+
+
+  })
+
+
+
+  function lookForNewBooking() {
     $(".customer-bookings-display").hide()
     $(".new-booking-box").show()
     displayAvailableBookings(hotel.todaysDate)
   }
 
   $(".new-booking-button").on("click", () => {
-    createNewBooking()
+    lookForNewBooking()
   })
 
   function checkBoxManager(e) {
+    $(".available-rooms-box").text('')
     let value = $(e.target).closest($("input:checkbox")).val()
     $(e.target).closest($("input:checkbox")).prop("checked", true)
     let available = hotel.availableRoomsByDate(hotel.todaysDate)
     let filtered =  available.filter(room => room.roomType === value)
-    $(".available-rooms-box").text('')
     filtered.forEach(room => {
-      $(".available-rooms-box").append("<h4>" + " Number: " + room.number
+      $(".available-rooms-box").append("<h5>" + " Number: " + room.number
        + " Type: " + room.roomType + " Bidet: " + room.bidet)
     })
     }
 
     $("input:checkbox").on("click", (e) => {
       $("input:checkbox").prop("checked", false)
-      console.log(checkBoxManager(e))
+      checkBoxManager(e)
     })
 
 function hideNonSpecificDisplays() {
@@ -67,13 +87,13 @@ function hideNonSpecificDisplays() {
   }
 
 
-function displayAvailableBookings(date) {
+function displayAvailableBookings(date1) {
   $(".available-rooms-box").show()
   $(".available-rooms-box").text('')
-  let availrooms = hotel.availableRoomsByDate(date)
+  let availrooms = hotel.availableRoomsByDate(date1)
   availrooms.forEach(room => {
-    $(".available-rooms-box").append("<h4>" + " Number: " + room.number
-     + " Type: " + room.roomType + " Bidet: " + room.bidet)
+    $(".available-rooms-box").append("<h5>" + " Number: " + room.number
+     + " Type: " + room.roomType + " Bidet: " + room.bidet + " Cost: " + room.costPerNight)
   })
 }
 
@@ -122,7 +142,7 @@ function displayAvailableBookings(date) {
   })
 
   $("#make-new-customer-name-button").on("click", () => {
-    makeNewCustomer()
+      makeNewCustomer()
     $(".customer-bookings-list-box").hide()
   })
 
@@ -132,12 +152,14 @@ function displayAvailableBookings(date) {
       $(".customer-bookings-message").text(`Looks like ${hotel.currentCustomer.name} has no bookings for today, click the button below to get a new booking started`)
     }
     else {
-      $(".customer-bookings-message").text(`${hotel.currentCustomer.name} already has booked room number ${hotel.doesCustomerHaveBookingToday()[0].roomNumber} for today, click the button below to change todays booking`)
+      $(".customer-bookings-message").text(`${hotel.currentCustomer.name} already has booked room number ${hotel.doesCustomerHaveBookingToday()[0].roomNumber} for today`)
+      $(".new-booking-button").hide()
     }
   }
 
 
   function displayCustomerSpecificBookings() {
+    $(".customer-bookings-list-box").text("")
       if (hotel.currentCustomer.customerBookings === null || hotel.currentCustomer.customerBookings.length === 0) {
         // $(".customer-bookings-message").text(`Sorry, ${hotel.currentCustomer.name} doesnt have any bookings yet`)
         makeNewBooking()
@@ -146,9 +168,9 @@ function displayAvailableBookings(date) {
       else {
         makeNewBooking()
         $(".customer-bookings-list-box").show()
-        $(".customer-bookings-message").append("<h4>" + `${hotel.currentCustomer.name} bookings are...`)
+        $(".customer-bookings-message").append("<h5>" + `${hotel.currentCustomer.name} bookings are...`)
         hotel.currentCustomer.customerBookings.forEach(booking => {
-          $(".customer-bookings-list-box").append("<h4>" + "Date Booked: " + booking.date + " Room number: " + booking.roomNumber)
+          $(".customer-bookings-list-box").append("<h5>" + "Date Booked: " + booking.date + " Room number: " + booking.roomNumber)
         })
       }
   }
@@ -197,18 +219,6 @@ function displayCustomerSpecificOrders() {
     $(".specific-order-total-display").text(`Total spent: $${hotel.currentCustomer.customerTotalSpentOnRoomService()}`)
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

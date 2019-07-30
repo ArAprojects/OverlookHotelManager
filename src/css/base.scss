@@ -19,7 +19,13 @@ main {
   margin: 2%;
 }
 
-h2  {
+h2 {
+  font-size: 1em;
+  margin: 0;
+  margin-left: auto;
+}
+
+h3  {
   margin: 0;
   margin-left: auto;
 }
@@ -33,11 +39,11 @@ section {
 button {
   background-color: #585555;
   width: 10%;
-  height: 50px;
+  height: 30px;
   margin-right: 2%;
   border: none;
   outline: 0;
-  font-size: 1.2em;
+  font-size: 20px;
 }
 
 table {
@@ -50,27 +56,29 @@ table {
 
 #main-page-button {
   background-color: darkgrey;
+  font-size: 1.5em
 }
 
 #orders-button {
-
+  font-size: 1.5em
 }
 
 
 #rooms-button {
-
+  font-size: 1.5em
 }
 
 #customers-button {
-
+  font-size: 1.5em
 }
 
 
 
 .main-page {
-  // background-image: url("../images/office.png");
-  // background-repeat: no-repeat;
-  // background-size: cover;
+  background-image: url("../images/Hotel.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   background-color: darkgrey;
 }
 
@@ -87,7 +95,7 @@ table {
 }
 
 .date-display {
-  text-align: right;
+
 }
 
 .customer-display-box {
@@ -99,4 +107,24 @@ table {
   border: 1px solid black;
   max-height: 300px;
   overflow: scroll;
+}
+
+.dash-displays {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  height: 30%;
+
+}
+
+.occupancy-display,
+.revenue-display {
+  width: 40%;
+  background-color: #a9a9a980;
+  margin-right: 10px;
+}
+
+.available-rooms-box {
+  width: 75%;
+  margin: auto;
 }
