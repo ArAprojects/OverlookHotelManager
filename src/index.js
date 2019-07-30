@@ -11,12 +11,14 @@ Promise.all([
   fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users").then(response => response.json())]
 ).then(data => makeHotel(data[0].rooms, data[1].bookings, data[2].roomServices, data[3].users))
 
-function makeHotel(rooms, bookings, roomService, users) {
-   hotel = new Hotel(rooms, bookings,roomService, users)
+function makeHotel(rooms, bookings, roomServices, users) {
+   hotel = new Hotel(rooms, bookings, roomServices, users)
    hotel.giveTodaysDate()
    hotel.giveallUsersBookingsandOrders()
    displayOrdersToday(hotel.todaysDate)
    console.log(hotel.users)
+   console.log(hotel.orders)
+   console.log(hotel.giveMenu())
    $(".date-display").text(`Welcome, todays date is: ${hotel.todaysDate}`)
    $(".occupancy-display").text(`There are ${hotel.roomsAvailableforToday()} rooms available today with an occupancy of ${hotel.percentRoomsOccupiedToday()} percent!`)
    $(".revenue-display").text(`${hotel.totalRevenueForToday()}$ was made today.`)
@@ -37,11 +39,9 @@ function makeHotel(rooms, bookings, roomService, users) {
 
   $(".make-booking-button").on("click", () => {
     submitNewBooking()
-
     console.log(hotel.currentCustomer.customerBookings)
-
-
   })
+
 
 
 
@@ -51,9 +51,47 @@ function makeHotel(rooms, bookings, roomService, users) {
     displayAvailableBookings(hotel.todaysDate)
   }
 
+  function makeNewOrder() {
+    $(".customer-orders-display").hide()
+    $(".new-orders-box").show()
+    $(".menu").text("")
+    $(".selection").text("")
+    let menuList = hotel.giveMenu()
+    menuList.forEach(item => {
+      $(".menu").append("<h5>" + item.food + " Cost: " + item.totalCost)
+    })
+  }
+
+
   $(".new-booking-button").on("click", () => {
     lookForNewBooking()
   })
+
+  $(".new-orders-button").on("click", () => {
+    makeNewOrder()
+  })
+
+  let newval
+  let costVal
+  $(".menu").on("click", (e) => {
+    let value = $(e.target).closest($("h5")).text()
+     newval = value.split("Cost")[0]
+     costVal = value.split(" ")[4]
+    $(".selection").text(`Your selection is: ${newval}`)
+    })
+
+    $(".confirm").on("click", () => {
+      hotel.createNewOrder(newval, parseInt(costVal))
+      displayCustomerSpecificOrders()
+    })
+
+  $(".confirm").on("click", () => {
+    $(".new-orders-box").hide()
+    $(".customer-orders-display").show()
+  })
+
+
+
 
   function checkBoxManager(e) {
     $(".available-rooms-box").text('')
@@ -84,6 +122,7 @@ function hideNonSpecificDisplays() {
     displayCustomerSpecificBookings()
     $(".new-booking-box").hide()
     $(".customer-bookings-display").show()
+    $(".new-orders-box").hide()
   }
 
 
@@ -113,6 +152,7 @@ function displayAvailableBookings(date1) {
      hotel.findCustomerByName(name)
      $(".specific-order-total-display").text("")
      $("table").text("")
+     $(".specific-order-total-display").text("")
      $(".customer-name").text(`Customer selected:${hotel.currentCustomer.name}`)
      hideNonSpecificDisplays()
      showSpecificDisplays()
@@ -124,6 +164,7 @@ function displayAvailableBookings(date1) {
     hotel.addNewCustomer(name)
     $("#new-customer-name-input").val('')
     $("table").text("")
+    $(".specific-order-total-display").text("")
     $(".customer-name").text(`Customer selected:${hotel.currentCustomer.name}`)
     hideNonSpecificDisplays()
     showSpecificDisplays()
@@ -161,12 +202,12 @@ function displayAvailableBookings(date1) {
   function displayCustomerSpecificBookings() {
     $(".customer-bookings-list-box").text("")
       if (hotel.currentCustomer.customerBookings === null || hotel.currentCustomer.customerBookings.length === 0) {
-        // $(".customer-bookings-message").text(`Sorry, ${hotel.currentCustomer.name} doesnt have any bookings yet`)
         makeNewBooking()
         $(".new-booking-button").show()
       }
       else {
         makeNewBooking()
+        $(".new-booking-button").show()
         $(".customer-bookings-list-box").show()
         $(".customer-bookings-message").append("<h5>" + `${hotel.currentCustomer.name} bookings are...`)
         hotel.currentCustomer.customerBookings.forEach(booking => {
@@ -179,6 +220,7 @@ function displayAvailableBookings(date1) {
 
 function displayOrdersToday(date) {
     $(".order-table").text('')
+
   if (hotel.ordersToday(date).length === 0) {
     $(".no-order-display").text("There are no orders today")
   }
@@ -201,10 +243,15 @@ function displayOrdersToday(date) {
 }
 
 function displayCustomerSpecificOrders() {
+  $(".specific-order-table").html("")
+
+  console.log(hotel.currentCustomer.customerOrders)
   if (hotel.currentCustomer.customerOrders === null || hotel.currentCustomer.customerOrders.length === 0 ) {
     $(".customer-orders-message").text(`Sorry, ${hotel.currentCustomer.name} doesnt have any orders yet`)
+    $(".new-orders-button").show()
   }
   else {
+    $(".specific-order-table").html("")
     $(".customer-orders-message").text(`${hotel.currentCustomer.name} orders are...`)
     $(".specific-order-table").append("<tr>")
     $(".specific-order-table").append("<td>" + "Food")
@@ -227,6 +274,9 @@ $("#main-page-button").on("click", () => {
   $(".main-page").show()
   $("button").css("background-color", "#585555");
   $("#main-page-button").css("background-color", "darkgrey")
+  $(".revenue-display").text(`${hotel.totalRevenueForToday()}$ was made today.`)
+  $(".occupancy-display").text(`There are ${hotel.roomsAvailableforToday()} rooms available today with an occupancy of ${hotel.percentRoomsOccupiedToday()} percent!`)
+
 })
 
 $("#orders-button").on("click", () => {
