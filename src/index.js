@@ -52,6 +52,7 @@ function makeHotel(rooms, bookings, roomServices, users) {
   }
 
   function makeNewOrder() {
+    $(".customer-orders-display").hide()
     $(".new-orders-box").show()
     $(".menu").text("")
     $(".selection").text("")
@@ -70,19 +71,23 @@ function makeHotel(rooms, bookings, roomServices, users) {
     makeNewOrder()
   })
 
+  let newval
+  let costVal
   $(".menu").on("click", (e) => {
     let value = $(e.target).closest($("h5")).text()
-    let newval = value.split("Cost")[0]
-    let costVal = value.split(" ")[4]
+     newval = value.split("Cost")[0]
+     costVal = value.split(" ")[4]
     $(".selection").text(`Your selection is: ${newval}`)
+    })
+
     $(".confirm").on("click", () => {
       hotel.createNewOrder(newval, parseInt(costVal))
+      displayCustomerSpecificOrders()
     })
-  })
 
   $(".confirm").on("click", () => {
     $(".new-orders-box").hide()
-    
+    $(".customer-orders-display").show()
   })
 
 
@@ -117,6 +122,7 @@ function hideNonSpecificDisplays() {
     displayCustomerSpecificBookings()
     $(".new-booking-box").hide()
     $(".customer-bookings-display").show()
+    $(".new-orders-box").hide()
   }
 
 
@@ -146,6 +152,7 @@ function displayAvailableBookings(date1) {
      hotel.findCustomerByName(name)
      $(".specific-order-total-display").text("")
      $("table").text("")
+     $(".specific-order-total-display").text("")
      $(".customer-name").text(`Customer selected:${hotel.currentCustomer.name}`)
      hideNonSpecificDisplays()
      showSpecificDisplays()
@@ -157,6 +164,7 @@ function displayAvailableBookings(date1) {
     hotel.addNewCustomer(name)
     $("#new-customer-name-input").val('')
     $("table").text("")
+    $(".specific-order-total-display").text("")
     $(".customer-name").text(`Customer selected:${hotel.currentCustomer.name}`)
     hideNonSpecificDisplays()
     showSpecificDisplays()
@@ -212,6 +220,7 @@ function displayAvailableBookings(date1) {
 
 function displayOrdersToday(date) {
     $(".order-table").text('')
+
   if (hotel.ordersToday(date).length === 0) {
     $(".no-order-display").text("There are no orders today")
   }
@@ -234,11 +243,15 @@ function displayOrdersToday(date) {
 }
 
 function displayCustomerSpecificOrders() {
+  $(".specific-order-table").html("")
+
+  console.log(hotel.currentCustomer.customerOrders)
   if (hotel.currentCustomer.customerOrders === null || hotel.currentCustomer.customerOrders.length === 0 ) {
     $(".customer-orders-message").text(`Sorry, ${hotel.currentCustomer.name} doesnt have any orders yet`)
     $(".new-orders-button").show()
   }
   else {
+    $(".specific-order-table").html("")
     $(".customer-orders-message").text(`${hotel.currentCustomer.name} orders are...`)
     $(".specific-order-table").append("<tr>")
     $(".specific-order-table").append("<td>" + "Food")
