@@ -2,6 +2,8 @@
 $primary-background: grey;
 $secondary-background: darkgrey;
 $blue: #26394a;
+$button-color: #585555;
+
 
 body {
   margin: 0;
@@ -42,7 +44,7 @@ section {
 
 
 button {
-  background-color: #585555;
+  background-color: $button-color;
   width: 180px;
   border: none;
   outline: 0;
@@ -83,7 +85,7 @@ table {
 }
 
 .darkgrey-button {
-  background-color: #585555;
+  background-color: $button-color;
 }
 
 #main-page-button {
@@ -191,4 +193,9 @@ table {
 
 #new-customer-name-input {
   margin-top: 20px;
+}
+
+.selection {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
