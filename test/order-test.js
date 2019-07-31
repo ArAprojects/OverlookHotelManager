@@ -5,24 +5,24 @@ import orders from '../data/orders-data.js'
 import rooms from '../data/room-data.js'
 import bookings from '../data/bookings-data.js'
 import Hotel from '../src/hotel.js';
-import Booking from '../src/booking.js';
+import Order from '../src/order.js';
 
 
-describe('Bookings', function() {
-  let booking
+describe('Orders', function() {
+  let order
   let hotel;
   beforeEach(() => {
-    booking = new Booking()
+    order = new Order()
     hotel = new Hotel(rooms, bookings, orders, users);
     hotel.addNewCustomer("billy")
   });
 
   it('should be a function', () => {
-    expect(Booking).to.be.a('function');
+    expect(Order).to.be.a('function');
   });
 
-  it('should be an instance of Booking', () => {
-    expect(booking).to.be.an.instanceof(Booking);
+  it('should be an instance of Order', () => {
+    expect(order).to.be.an.instanceof(Order);
   });
 
 });
