@@ -44,7 +44,7 @@ describe('Customer', function() {
 
   it('should be able to calculate booking revenue', () => {
     hotel.createNewBooking(1)
-    expect(hotel.currentCustomer.customerTotalBookingRevenue(hotel)).to.eql(265.03)
+    expect(hotel.currentCustomer.customerTotalBookingRevenue(hotel)).to.eql("265.03")
   });
 
   it('should be able to calculate totalOrderRevenue', () => {
