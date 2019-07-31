@@ -1,17 +1,18 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
 $primary-background: grey;
+$secondary-background: darkgrey;
 
 body {
   margin: 0;
   padding: 0;
-  background-color: $primary-background;
+  background-color: #26394a;
   height: 100vh;
   font-family: 'Nunito';
   letter-spacing: 2px;
 }
 
 header {
-  background-color: grey;
+  background-color: #26394a;
   display: flex;
 }
 
@@ -25,26 +26,52 @@ h2 {
   margin-left: auto;
 }
 
-h3  {
+h4  {
   margin: 0;
-  margin-left: auto;
+  margin-top: 40px;
 }
 
 
 section {
-  height: 87vh;
+  height: -webkit-fill-available;
   font-weight: bold;
   font-size: 1.6em;
 }
 
+
 button {
   background-color: #585555;
-  width: 10%;
-  height: 30px;
-  margin-right: 2%;
+  width: 180px;
   border: none;
   outline: 0;
-  font-size: 20px;
+  height: 30px;
+  font-size: .7em;
+  padding: 0;
+}
+
+input {
+  height: 30px;
+  width: 180px;
+  padding: 0;
+  border: none;
+  margin-bottom: 10px;
+}
+
+.tab-button {
+  width: 8.9%;
+  margin-right: 2%;
+}
+
+
+.input-button-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.booking-search-input,
+.unpopular-display {
+  margin-top: 20px;
 }
 
 table {
@@ -57,47 +84,102 @@ table {
 }
 
 #main-page-button {
-  background-color: darkgrey;
-  font-size: 1.5em
+  background-color: $secondary-background;
+  font-size: 1.5em;
 }
 
 #orders-button {
-  font-size: 1.5em
+  font-size: 1.5em;
 }
 
 
 #rooms-button {
-  font-size: 1.5em
+  font-size: 1.5em;
 }
 
-#customers-button {
-  font-size: 1.5em
+#customer-button {
+  font-size: 1.5em;
+}
+
+.booking-search-button {
+  margin-bottom: 20px;
 }
 
 
 
 .main-page {
+  background-color: $secondary-background;
+  display: flex;
+  flex-direction: row;
+}
+
+.orders,
+.rooms,
+.customer {
+  display: flex;
+  font-size: 1em;
+}
+
+.order-display,
+.make-booking-input {
+  margin-top: 20px;
+}
+
+.new-booking-button {
+  margin: 30px;
+}
+
+.image-1,
+.image-2,
+.image-3,
+.image-4 {
   background-image: url("../images/Hotel.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  background-color: darkgrey;
+  width: 60%;
+}
+
+
+
+// .image-2 {
+//   background-image: url("../images/Hotel.jpg");
+// }
+
+.main-dash-display,
+.main-orders-display,
+.main-bookings-display,
+.main-cutomers-display {
+  background-color: grey;
+  width: 40%;
+  font-size: 1.6em;
+  text-align: center;
+  border: 20px solid $secondary-background;
+}
+
+.check-box-box {
+  display: flex;
+  margin-top: 30px;
+}
+
+.main-bookings-display {
+  font-size: 1.4em;
 }
 
 .orders {
-  background-color: darkgrey;
+  background-color: $secondary-background;
 }
 
 .rooms {
-  background-color: darkgrey;
+  background-color: $secondary-background;
 }
 
 .customer {
-  background-color: darkgrey;
+  background-color: $secondary-background;
 }
 
 .date-display {
-
+  font-size: .8em
 }
 
 .customer-display-box {
@@ -107,24 +189,20 @@ table {
 .customer-bookings-list-box,
 .available-rooms-box,
 .menu {
+  margin-top: 20px;
   border: 1px solid black;
-  max-height: 300px;
+  max-height: 250px;
   overflow: scroll;
-  width: 75%;
   margin: auto;
 }
 
 .dash-displays {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  height: 30%;
-
+  font-size: .7em
 }
+
 
 .occupancy-display,
 .revenue-display {
-  width: 40%;
-  background-color: #a9a9a980;
-  margin-right: 10px;
+  background-color: grey;
+  margin-top: 40px;
 }
