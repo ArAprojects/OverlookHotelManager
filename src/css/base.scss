@@ -21,9 +21,10 @@ main {
 }
 
 h2 {
-  font-size: 1em;
+  font-size: 1.4em;
   margin: 0;
   margin-left: auto;
+  color: white;
 }
 
 h4  {
@@ -60,6 +61,7 @@ input {
 .tab-button {
   width: 8.9%;
   margin-right: 2%;
+  height: 35px;
 }
 
 
@@ -205,4 +207,8 @@ table {
 .revenue-display {
   background-color: grey;
   margin-top: 40px;
+}
+
+#new-customer-name-input {
+  margin-top: 20px;
 }
