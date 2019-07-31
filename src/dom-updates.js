@@ -39,6 +39,12 @@ let domUpdates = {
     $(".rooms").show()
     $("button").css("background-color", "#585555");
     $("#rooms-button").css("background-color", "darkgrey")
+  },
+
+  showDisplays() {
+    $(".new-booking-box").hide()
+    $(".customer-bookings-display").show()
+    $(".new-orders-box").hide()
   }
 
 
