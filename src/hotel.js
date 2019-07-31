@@ -26,7 +26,7 @@ class Hotel {
   giveTodaysDate() {
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
     var yyyy = today.getFullYear();
     this.todaysDate = yyyy + '/' + mm + '/' + dd;
   }
@@ -47,7 +47,7 @@ class Hotel {
       return this.bookings.filter(booking => booking.date === date1)
     })
     let finalDate = filteredDates.sort(  (a, b) => b.length - a.length )[0][0].date
-     return `The most popular date is ${finalDate} with ${filteredDates[0].length} rooms booked.`
+    return `The most popular date is ${finalDate} with ${filteredDates[0].length} rooms booked.`
   }
 
   findLeastPopularDate() {
@@ -57,18 +57,17 @@ class Hotel {
       return this.bookings.filter(booking => booking.date === date1)
     })
     let finalDate = filteredDates.sort(  (a, b) => a.length - b.length )[0][0].date
-     return `The least popular date is ${finalDate} with ${filteredDates[0].length} rooms booked.`
+    return `The least popular date is ${finalDate} with ${filteredDates[0].length} rooms booked.`
   }
 
-
   percentRoomsOccupiedToday() {
-      let occRooms = this.roomsBookedToday()
-      return ((occRooms / this.rooms.length) * 100).toFixed(0)
+    let occRooms = this.roomsBookedToday()
+    return ((occRooms / this.rooms.length) * 100).toFixed(0)
   }
 
   totalOrderRevenue() {
     let ordersToday = this.orders.filter(order => order.date === this.todaysDate)
-     return ordersToday.reduce((acc, total) => acc + total.totalCost, 0)
+    return ordersToday.reduce((acc, total) => acc + total.totalCost, 0)
   }
 
   ordersToday(date) {
@@ -81,11 +80,10 @@ class Hotel {
     return this.rooms.filter(room => !bookedNum.includes(room.number))
   }
 
-
   totalBookingRevenue() {
     let bookingsToday = this.bookings.filter(booking => booking.date === this.todaysDate)
     let roomsbooked = bookingsToday.map(booking => this.rooms.find(room => room.number === booking.roomNumber))
-     return roomsbooked.reduce((acc, total) => acc + total.costPerNight, 0)
+    return roomsbooked.reduce((acc, total) => acc + total.costPerNight, 0)
   }
 
   totalRevenueForToday() {
@@ -116,8 +114,7 @@ class Hotel {
   doesCustomerHaveBookingToday() {
     if (this.currentCustomer.customerBookings.filter(booking => booking.date === this.todaysDate).length === 0) {
       return null
-    }
-    else {
+    } else {
       return this.currentCustomer.customerBookings.filter(booking => booking.date === this.todaysDate)
     }
   }

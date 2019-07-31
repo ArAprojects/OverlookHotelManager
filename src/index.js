@@ -38,6 +38,7 @@ function onLoad() {
   $(".revenue-display").text(`${hotel.totalRevenueForToday()}$ was made today.`)
   $(".popular-display").text(hotel.findMostPopularDate())
   $(".unpopular-display").text(hotel.findLeastPopularDate())
+  displayAllUsers()
 }
 
 $("#main-page-button").on("click", () => {
@@ -53,6 +54,13 @@ function submitNewBooking() {
   $(".new-booking-box").hide()
   $(".customer-bookings-display").show()
   displayCustomerSpecificBookings()
+}
+
+function displayAllUsers() {
+  $(".user-display-box").text("")
+    hotel.users.forEach(user => {
+      $(".user-display-box").append("<h5>" + " UserID: " + user.id + " Name: " + user.name)
+    })
 }
 
 $(".make-booking-button").on("click", () => {
@@ -156,6 +164,7 @@ function makeNewCustomer() {
   $("#new-customer-name-input").val('')
   domUpdates.clearTable()
   $(".customer-name").text(`Customer selected:${hotel.currentCustomer.name}`)
+  displayAllUsers()
   hideNonSpecificDisplays()
   showSpecificDisplays()
 }
