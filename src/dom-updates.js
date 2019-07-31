@@ -45,9 +45,12 @@ let domUpdates = {
     $(".new-booking-box").hide()
     $(".customer-bookings-display").show()
     $(".new-orders-box").hide()
+  },
+
+  clearTable() {
+    $(".specific-order-total-display").text("")
+    $("table").text("")
   }
-
-
 
 
 }
