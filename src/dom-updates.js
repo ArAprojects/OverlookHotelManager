@@ -50,6 +50,12 @@ let domUpdates = {
   clearTable() {
     $(".specific-order-total-display").text("")
     $("table").text("")
+  },
+
+  tableAppend() {
+    $(".order-table").append("<td>" + "Food")
+    $(".order-table").append("<td>" + "Date")
+    $(".order-table").append("<td>" + "TotalCost")
   }
 
 

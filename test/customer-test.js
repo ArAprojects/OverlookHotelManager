@@ -42,4 +42,15 @@ describe('Customer', function() {
     expect(hotel.currentCustomer.customerOrders.length).to.eql(1)
   });
 
+  it('should be able to calculate booking revenue', () => {
+    hotel.createNewBooking(1)
+    expect(hotel.currentCustomer.customerTotalBookingRevenue(hotel)).to.eql(265.03)
+  });
+
+  it('should be able to calculate totalOrderRevenue', () => {
+    hotel.createNewOrder("food", 15.00)
+    expect(hotel.currentCustomer.customerTotalSpentOnRoomService()).to.eql("15.00")
+  });
+
+
 });

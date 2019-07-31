@@ -26,6 +26,11 @@ class Customer {
     return (this.customerOrders.reduce( (acc, total) => acc + total.totalCost, 0)).toFixed(2)
   }
 
+  customerTotalBookingRevenue(hotel) {
+    let roomsbooked = this.customerBookings.map(booking => hotel.rooms.find(room => room.number === booking.roomNumber))
+    return roomsbooked.reduce((acc, total) => acc + total.costPerNight, 0).toFixed(2)
+  }
+
 
 }
 

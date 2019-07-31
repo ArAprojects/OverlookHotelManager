@@ -20,6 +20,18 @@ function makeHotel(rooms, bookings, roomServices, users) {
   onLoad()
 }
 
+$("#orders-button").on("click", () => {
+  domUpdates.orderSwitch()
+})
+
+$("#rooms-button").on("click", () => {
+  domUpdates.bookingsSwitch()
+})
+
+$("#customer-button").on("click", () => {
+  domUpdates.customerSwitch()
+})
+
 function onLoad() {
   $(".date-display").text(`Welcome, todays date is: ${hotel.todaysDate}`)
   $(".occupancy-display").text(`There are ${hotel.roomsAvailableforToday()} rooms available today with an occupancy of ${hotel.percentRoomsOccupiedToday()} percent!`)
@@ -28,6 +40,11 @@ function onLoad() {
   $(".unpopular-display").text(hotel.findLeastPopularDate())
 }
 
+$("#main-page-button").on("click", () => {
+  domUpdates.mainSwitch()
+  $(".revenue-display").text(`${hotel.totalRevenueForToday()}$ was made today.`)
+  $(".occupancy-display").text(`There are ${hotel.roomsAvailableforToday()} rooms available today with an occupancy of ${hotel.percentRoomsOccupiedToday()} percent!`)
+})
 
 function submitNewBooking() {
   let roomNumber = parseInt($(".make-booking-input").val())
@@ -37,7 +54,6 @@ function submitNewBooking() {
   $(".customer-bookings-display").show()
   displayCustomerSpecificBookings()
 }
-
 
 $(".make-booking-button").on("click", () => {
   submitNewBooking()
@@ -84,7 +100,7 @@ function checkBoxManager(e) {
   let filtered =  available.filter(room => room.roomType === value)
   filtered.forEach(room => {
     $(".available-rooms-box").append("<h5>" + " Number: " + room.number
-       + " Type: " + room.roomType + " Bidet: " + room.bidet)
+       + " Type: " + room.roomType + " Bidet: " + room.bidet + " Cost " + room.costPerNight)
   })
 }
 
@@ -171,9 +187,10 @@ function makeNewBooking() {
   }
 }
 
-
 function displayCustomerSpecificBookings() {
   $(".customer-bookings-list-box").text("")
+  $(".customer-bookings-total").text("")
+  $(".customer-bookings-message-2").text("")
   if (hotel.currentCustomer.customerBookings === null || hotel.currentCustomer.customerBookings.length === 0) {
     makeNewBooking()
     $(".new-booking-button").show()
@@ -185,14 +202,12 @@ function displayCustomerSpecificBookings() {
     hotel.currentCustomer.customerBookings.forEach(booking => {
       $(".customer-bookings-list-box").append("<h5>" + "Date Booked: " + booking.date + " Room number: " + booking.roomNumber)
     })
+    $(".customer-bookings-total").text(`Total spent: $${hotel.currentCustomer.customerTotalBookingRevenue(hotel)}`)
   }
 }
 
-
-
 function displayOrdersToday(date) {
   $(".order-table").text('')
-
   if (hotel.ordersToday(date).length === 0) {
     $(".no-order-display").text("There are no orders today")
   } else {
@@ -200,9 +215,7 @@ function displayOrdersToday(date) {
     $(".order-display").text(`Orders for ${date}`)
     $(".order-table").append("<tr>")
     $(".order-table").append("<td>" + "ID")
-    $(".order-table").append("<td>" + "Food")
-    $(".order-table").append("<td>" + "Date")
-    $(".order-table").append("<td>" + "TotalCost")
+    domUpdates.tableAppend()
     hotel.ordersToday(date).forEach(order => {
       $(".order-table").append("<tr>")
       $(".order-table").append("<td>" + order.userID)
@@ -222,9 +235,7 @@ function displayCustomerSpecificOrders() {
     $(".specific-order-table").html("")
     $(".customer-orders-message").text(`${hotel.currentCustomer.name} orders are...`)
     $(".specific-order-table").append("<tr>")
-    $(".specific-order-table").append("<td>" + "Food")
-    $(".specific-order-table").append("<td>" + "Date")
-    $(".specific-order-table").append("<td>" + "TotalCost")
+    domUpdates.tableAppend()
     hotel.currentCustomer.customerOrders.forEach(order => {
       $(".specific-order-table").append("<tr>")
       $(".specific-order-table").append("<td>" + order.food)
@@ -234,21 +245,3 @@ function displayCustomerSpecificOrders() {
     $(".specific-order-total-display").text(`Total spent: $${hotel.currentCustomer.customerTotalSpentOnRoomService()}`)
   }
 }
-
-$("#main-page-button").on("click", () => {
-  domUpdates.mainSwitch()
-  $(".revenue-display").text(`${hotel.totalRevenueForToday()}$ was made today.`)
-  $(".occupancy-display").text(`There are ${hotel.roomsAvailableforToday()} rooms available today with an occupancy of ${hotel.percentRoomsOccupiedToday()} percent!`)
-})
-
-$("#orders-button").on("click", () => {
-  domUpdates.orderSwitch()
-})
-
-$("#rooms-button").on("click", () => {
-  domUpdates.bookingsSwitch()
-})
-
-$("#customer-button").on("click", () => {
-  domUpdates.customerSwitch()
-})
