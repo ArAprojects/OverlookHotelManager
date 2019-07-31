@@ -2,6 +2,7 @@ import $ from 'jquery';
 import './css/base.scss';
 import './images/office.png'
 import Hotel from '../src/hotel.js'
+import domUpdates from '../src/dom-updates.js'
 var hotel
 
 Promise.all([
@@ -16,9 +17,6 @@ function makeHotel(rooms, bookings, roomServices, users) {
    hotel.giveTodaysDate()
    hotel.giveallUsersBookingsandOrders()
    displayOrdersToday(hotel.todaysDate)
-   console.log(hotel.users)
-   console.log(hotel.orders)
-   console.log(hotel.giveMenu())
    $(".date-display").text(`Welcome, todays date is: ${hotel.todaysDate}`)
    $(".occupancy-display").text(`There are ${hotel.roomsAvailableforToday()} rooms available today with an occupancy of ${hotel.percentRoomsOccupiedToday()} percent!`)
    $(".revenue-display").text(`${hotel.totalRevenueForToday()}$ was made today.`)
@@ -39,10 +37,7 @@ function makeHotel(rooms, bookings, roomServices, users) {
 
   $(".make-booking-button").on("click", () => {
     submitNewBooking()
-    console.log(hotel.currentCustomer.customerBookings)
   })
-
-
 
 
   function lookForNewBooking() {
@@ -51,16 +46,16 @@ function makeHotel(rooms, bookings, roomServices, users) {
     displayAvailableBookings(hotel.todaysDate)
   }
 
-  function makeNewOrder() {
-    $(".customer-orders-display").hide()
-    $(".new-orders-box").show()
-    $(".menu").text("")
-    $(".selection").text("")
-    let menuList = hotel.giveMenu()
-    menuList.forEach(item => {
-      $(".menu").append("<h5>" + item.food + " Cost: " + item.totalCost)
-    })
-  }
+  // function makeNewOrder() {
+  //   $(".customer-orders-display").hide()
+  //   $(".new-orders-box").show()
+  //   $(".menu").text("")
+  //   $(".selection").text("")
+  //   let menuList = hotel.giveMenu()
+  //   menuList.forEach(item => {
+  //     $(".menu").append("<h5>" + item.food + " Cost: " + item.totalCost)
+  //   })
+  // }
 
 
   $(".new-booking-button").on("click", () => {
@@ -68,7 +63,7 @@ function makeHotel(rooms, bookings, roomServices, users) {
   })
 
   $(".new-orders-button").on("click", () => {
-    makeNewOrder()
+    domUpdates.makeNewOrder(hotel)
   })
 
   let newval
@@ -89,9 +84,6 @@ function makeHotel(rooms, bookings, roomServices, users) {
     $(".new-orders-box").hide()
     $(".customer-orders-display").show()
   })
-
-
-
 
   function checkBoxManager(e) {
     $(".available-rooms-box").text('')
@@ -125,7 +117,6 @@ function hideNonSpecificDisplays() {
     $(".new-orders-box").hide()
   }
 
-
 function displayAvailableBookings(date1) {
   $(".available-rooms-box").show()
   $(".available-rooms-box").text('')
@@ -135,7 +126,6 @@ function displayAvailableBookings(date1) {
      + " Type: " + room.roomType + " Bidet: " + room.bidet + " Cost: " + room.costPerNight)
   })
 }
-
 
   function searchForOrders() {
     let date = $(".order-search-input").val()
@@ -156,7 +146,6 @@ function displayAvailableBookings(date1) {
      $(".customer-name").text(`Customer selected:${hotel.currentCustomer.name}`)
      hideNonSpecificDisplays()
      showSpecificDisplays()
-
   }
 
   function makeNewCustomer() {
@@ -244,8 +233,6 @@ function displayOrdersToday(date) {
 
 function displayCustomerSpecificOrders() {
   $(".specific-order-table").html("")
-
-  console.log(hotel.currentCustomer.customerOrders)
   if (hotel.currentCustomer.customerOrders === null || hotel.currentCustomer.customerOrders.length === 0 ) {
     $(".customer-orders-message").text(`Sorry, ${hotel.currentCustomer.name} doesnt have any orders yet`)
     $(".new-orders-button").show()
@@ -267,24 +254,23 @@ function displayCustomerSpecificOrders() {
   }
 }
 
-
-
 $("#main-page-button").on("click", () => {
-  $("section").hide()
-  $(".main-page").show()
-  $(".main-dash-display").show()
-  $("button").css("background-color", "#585555");
-  $("#main-page-button").css("background-color", "darkgrey")
+  domUpdates.mainSwitch()
+  // $("section").hide()
+  // $(".main-page").show()
+  // $(".main-dash-display").show()
+  // $("button").css("background-color", "#585555");
+  // $("#main-page-button").css("background-color", "darkgrey")
   $(".revenue-display").text(`${hotel.totalRevenueForToday()}$ was made today.`)
   $(".occupancy-display").text(`There are ${hotel.roomsAvailableforToday()} rooms available today with an occupancy of ${hotel.percentRoomsOccupiedToday()} percent!`)
-
 })
 
 $("#orders-button").on("click", () => {
-  $("section").hide()
-  $(".orders").show()
-  $("button").css("background-color", "#585555");
-  $("#orders-button").css("background-color", "darkgrey")
+  domUpdates.orderSwitch()
+  // $("section").hide()
+  // $(".orders").show()
+  // $("button").css("background-color", "#585555");
+  // $("#orders-button").css("background-color", "darkgrey")
 })
 
 $("#rooms-button").on("click", () => {
@@ -295,8 +281,9 @@ $("#rooms-button").on("click", () => {
 })
 
 $("#customer-button").on("click", () => {
-  $("section").hide()
-  $(".customer").show()
-  $("button").css("background-color", "#585555");
-  $("#customer-button").css("background-color", "darkgrey")
+  domUpdates.customerSwitch()
+  // $("section").hide()
+  // $(".customer").show()
+  // $("button").css("background-color", "#585555");
+  // $("#customer-button").css("background-color", "darkgrey")
 })
