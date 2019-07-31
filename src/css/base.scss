@@ -114,7 +114,8 @@ table {
 }
 
 .orders,
-.rooms, {
+.rooms,
+.customer {
   display: flex;
   font-size: 1em;
 }
@@ -130,7 +131,8 @@ table {
 
 .image-1,
 .image-2,
-.image-3 {
+.image-3,
+.image-4 {
   background-image: url("../images/Hotel.jpg");
   background-repeat: no-repeat;
   background-position: center;
@@ -146,7 +148,8 @@ table {
 
 .main-dash-display,
 .main-orders-display,
-.main-bookings-display {
+.main-bookings-display,
+.main-cutomers-display {
   background-color: grey;
   width: 40%;
   font-size: 1.6em;
