@@ -69,6 +69,10 @@ input {
   align-items: center;
 }
 
+.booking-search-input,
+.unpopular-display {
+  margin-top: 20px;
+}
 
 table {
   border-spacing: 20px;
@@ -97,6 +101,10 @@ table {
   font-size: 1.5em;
 }
 
+.booking-search-button {
+  margin-bottom: 20px;
+}
+
 
 
 .main-page {
@@ -105,17 +113,24 @@ table {
   flex-direction: row;
 }
 
-.orders {
+.orders,
+.rooms, {
   display: flex;
   font-size: 1em;
 }
 
-.order-display {
+.order-display,
+.make-booking-input {
   margin-top: 20px;
 }
 
+.new-booking-button {
+  margin: 30px;
+}
+
 .image-1,
-.image-2 {
+.image-2,
+.image-3 {
   background-image: url("../images/Hotel.jpg");
   background-repeat: no-repeat;
   background-position: center;
@@ -123,17 +138,29 @@ table {
   width: 60%;
 }
 
-.image-2 {
-  background-image: url("../images/Hotel.jpg");
-}
+
+
+// .image-2 {
+//   background-image: url("../images/Hotel.jpg");
+// }
 
 .main-dash-display,
-.main-orders-display {
+.main-orders-display,
+.main-bookings-display {
   background-color: grey;
   width: 40%;
   font-size: 1.6em;
   text-align: center;
   border: 20px solid $secondary-background;
+}
+
+.check-box-box {
+  display: flex;
+  margin-top: 30px;
+}
+
+.main-bookings-display {
+  font-size: 1.4em;
 }
 
 .orders {
@@ -159,17 +186,16 @@ table {
 .customer-bookings-list-box,
 .available-rooms-box,
 .menu {
+  margin-top: 20px;
   border: 1px solid black;
-  max-height: 300px;
+  max-height: 250px;
   overflow: scroll;
-  width: 75%;
   margin: auto;
 }
 
 .dash-displays {
   font-size: .7em
 }
-
 
 
 .occupancy-display,

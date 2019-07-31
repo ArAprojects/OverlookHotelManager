@@ -193,7 +193,7 @@ function displayAvailableBookings(date1) {
       $(".customer-bookings-message").text(`Looks like ${hotel.currentCustomer.name} has no bookings for today, click the button below to get a new booking started`)
     }
     else {
-      $(".customer-bookings-message").text(`${hotel.currentCustomer.name} already has booked room number ${hotel.doesCustomerHaveBookingToday()[0].roomNumber} for today`)
+      $(".customer-bookings-message").text(`${hotel.currentCustomer.name} has booked room number ${hotel.doesCustomerHaveBookingToday()[0].roomNumber} for today`)
       $(".new-booking-button").hide()
     }
   }
@@ -207,9 +207,9 @@ function displayAvailableBookings(date1) {
       }
       else {
         makeNewBooking()
+        $(".customer-bookings-message-2").text(`${hotel.currentCustomer.name} bookings are...`)
         $(".new-booking-button").show()
         $(".customer-bookings-list-box").show()
-        $(".customer-bookings-message").append("<h5>" + `${hotel.currentCustomer.name} bookings are...`)
         hotel.currentCustomer.customerBookings.forEach(booking => {
           $(".customer-bookings-list-box").append("<h5>" + "Date Booked: " + booking.date + " Room number: " + booking.roomNumber)
         })
