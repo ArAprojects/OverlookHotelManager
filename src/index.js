@@ -272,6 +272,7 @@ function displayCustomerSpecificOrders() {
 $("#main-page-button").on("click", () => {
   $("section").hide()
   $(".main-page").show()
+  $(".main-dash-display").show()
   $("button").css("background-color", "#585555");
   $("#main-page-button").css("background-color", "darkgrey")
   $(".revenue-display").text(`${hotel.totalRevenueForToday()}$ was made today.`)

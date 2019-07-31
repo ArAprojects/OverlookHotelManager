@@ -9,51 +9,61 @@
   <body>
     <main>
       <header>
-        <button type="button" name="button" id="main-page-button">Home</button>
-        <button type="button" name="button" id="orders-button">Orders</button>
-        <button type="button" name="button" id="rooms-button">Bookings</button>
-        <button type="button" name="button" id="customer-button">Customer</button>
+        <button type="button" name="button" class="tab-button" id="main-page-button">Home</button>
+        <button type="button" name="button" class="tab-button" id="orders-button">Orders</button>
+        <button type="button" name="button" class="tab-button" id="rooms-button">Bookings</button>
+        <button type="button" name="button" class="tab-button" id="customer-button">Customer</button>
         <h2 class="customer-name"></h2>
       </header>
       <section class="main-page">
-        <h3 class="date-display"></h3>
-      <div class="dash-displays">
-        <div class="occupancy-display">
+        <div class="main-dash-display">
+          <h4 class="date-display"></h4>
+          <div class="dash-displays">
+          <div class="occupancy-display">
+          </div>
+          <div class="revenue-display">
+          </div>
+          </div>
         </div>
-        <div class="revenue-display">
-        </div>
-      </div>
+        <aside class="image-1">
+        </aside>
       </section>
       <section class="orders" style="display: none">
-        <h3>Orders</h3>
-        <div class="general-display order-display-box">
-          <div class="no-order-display">
+        <div class="main-orders-display">
+          <h3>Orders</h3>
+          <div class="general-display order-display-box">
+            <div class="no-order-display">
+            </div>
+            <div class="input-button-box">
+              <p>Search yyyy/mm/dd for orders</p>
+              <input class="order-search-input" type="text" name="" value="">
+              <button class="order-search-button" type="button" name="button">find</button>
+            </div>
+            <div class="order-display">
+            </div>
+            <table class="order-table">
+            </table>
           </div>
-          <p>Search yyyy/mm/dd for orders</p>
-          <input class="order-search-input" type="text" name="" value="">
-          <button class="order-search-button" type="button" name="button">find</button>
-          <div class="order-display">
+          <div class="customer-orders-display">
+            <div class="customer-orders-message">
+            </div>
+            <button class="new-orders-button" type="button" name="button" style="display: none;">New Order</button>
+            <table class="specific-order-table">
+            </table>
+            <div class="specific-order-total-display">
+            </div>
           </div>
-          <table class="order-table">
-          </table>
+          <div class="new-orders-box" style="display: none">
+            <h4>click on an item to make a selection </h4>
+            <div class="menu">
+            </div>
+            <div class="selection">
+            </div>
+            <button class="confirm" type="button" name="button">Confirm Order</button>
+          </div>
         </div>
-        <div class="customer-orders-display">
-          <div class="customer-orders-message">
-          </div>
-          <button class="new-orders-button" type="button" name="button" style="display: none;">New Order</button>
-          <table class="specific-order-table">
-          </table>
-          <div class="specific-order-total-display">
-          </div>
-        </div>
-        <div class="new-orders-box" style="display: none">
-          <h4>click on an item to make a selection </h4>
-          <div class="menu">
-          </div>
-          <div class="selection">
-          </div>
-          <button class="confirm" type="button" name="button">Confirm Order</button>
-        </div>
+        <aside class="image-2">
+        </aside>
       </section>
       <section class="rooms" style="display: none">
         <h3>Bookings</h3>
