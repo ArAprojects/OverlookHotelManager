@@ -1,7 +1,7 @@
-#Overlook-Hotel Manager
+<h1>Overlook-Hotel Manager<h1>
 
 Overlook is a hotel management web application where a user (manager) can manage the daily operations of the hotel.
-This includes making and searching for customers, bookings, orders. Which will constantly fluctuate the hotels total revenue and available rooms.
+This includes making and searching for customers, bookings, orders. Which will constantly fluctuate the hotels total revenue and available rooms. All data is saved upon switching users and making new orders.
 
 This project was created in a week using tools such as:
 
